@@ -7,6 +7,8 @@ namespace financias.src.Repository
     {
         private UserRepository _userRepository;
         private BanckRepository _banckRepository;
+        private BanckAccountRepository _banckAccountRepository;
+        private UserBanckAccountRepository _userBanckAccountRepository;
         public AppDbContext _context;
 
         public UnitOfWork(AppDbContext context)
@@ -31,7 +33,24 @@ namespace financias.src.Repository
 
             }
         }
+        public IBanckAccountRepository banckAccountRepository
+        {
+            get
+            {
+                return _banckAccountRepository = _banckAccountRepository ?? new BanckAccountRepository(_context);
 
+            }
+        }
+        public IUserBancksAccountsRepository userBancksAccountsRepository
+        {
+            get
+            {
+                return _userBanckAccountRepository = _userBanckAccountRepository ?? new UserBanckAccountRepository(_context);
+
+            }
+        }
+
+        
         public async Task Commit()
         {
             await _context.SaveChangesAsync();

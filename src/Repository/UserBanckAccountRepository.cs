@@ -5,11 +5,12 @@ using financias.src.Repository.Base;
 
 namespace financias.src.Repository
 {
-    public class BanckAccountRepository: BaseRepository<BanckAccount>, IBanckAccountRepository
+    public class UserBanckAccountRepository: BaseRepository<UserBancksAccounts>, IUserBancksAccountsRepository
     {
-        public BanckAccountRepository(AppDbContext context):base(context){
-            
+        public UserBanckAccountRepository(AppDbContext context):base(context){
+
         }
+        
         
     }
 }
