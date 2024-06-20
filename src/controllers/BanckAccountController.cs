@@ -22,5 +22,25 @@ namespace financias.src.controllers
             await _mediator.Send(createBanckAcconutCommand);
             return Created();
         }
+
+       [HttpPut("{id:guid}")]
+        public async Task<IActionResult> Update(UpdateBanckAcconutCommand updateBanckAcconutCommand,Guid id){
+
+            updateBanckAcconutCommand.Id =id;
+
+            await _mediator.Send(updateBanckAcconutCommand);
+            return Ok();
+        }
+
+        [HttpDelete("{id:guid}")]
+        public async Task<IActionResult> Delete(Guid id){
+
+            var deleteBanckAcconutCommand = new DeleteBanckAcconutCommand(){ Id = id};
+
+            await _mediator.Send(deleteBanckAcconutCommand);
+            return NoContent();
+        }
+        
+
     }
 }
