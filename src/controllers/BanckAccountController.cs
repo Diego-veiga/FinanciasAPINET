@@ -56,6 +56,17 @@ namespace financias.src.controllers
             var result = await _mediator.Send(getBanckAccountById);
             return result is null ? NotFound("BanckAccount Not found") : Ok(result);
         }
+        [HttpGet()]
+        public async Task<IActionResult> GetAll()
+        {
+            var getBanckAccountAllByUserId = new GetBanckAccountAllByUserId()
+            {
+                    UserId = Guid.Parse(User.Claims.First(c => c.Type == "id").Value)
+            };
+
+            var result = await _mediator.Send(getBanckAccountAllByUserId);
+            return result is null ? NotFound("BanckAccount Not found") : Ok(result);
+        }
 
     }
 }
