@@ -1,5 +1,6 @@
 using financias.src.commands.BanckAccount;
 using financias.src.query.BanckAccount;
+using FluentValidation;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,14 +11,15 @@ namespace financias.src.controllers
     public class BanckAccountController : ControllerBase
     {
         public IMediator _mediator { get; set; }
-        public BanckAccountController(IMediator mediator)
+    
+        public BanckAccountController(IMediator mediator,IValidator<CreateBanckAcconutCommand>  validator)
         {
             _mediator = mediator;
         }
 
         [HttpPost]
         public async Task<IActionResult> Create(CreateBanckAcconutCommand createBanckAcconutCommand)
-        {
+        {  
 
             createBanckAcconutCommand.UserId = Guid.Parse(User.Claims.First(c => c.Type == "id").Value);
 
@@ -28,7 +30,6 @@ namespace financias.src.controllers
         [HttpPut("{id:guid}")]
         public async Task<IActionResult> Update(UpdateBanckAcconutCommand updateBanckAcconutCommand, Guid id)
         {
-
             updateBanckAcconutCommand.Id = id;
 
             await _mediator.Send(updateBanckAcconutCommand);

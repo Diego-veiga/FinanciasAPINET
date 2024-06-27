@@ -1,7 +1,6 @@
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
-using financias.src.validation;
+using financias.src.validations;
 
 namespace financias.src.DTOs
 {

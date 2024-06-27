@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using financias.src.utils;
 
-namespace financias.src.validation
+namespace financias.src.validations
 {
     public class CnpjCPFValidation : ValidationAttribute
     {

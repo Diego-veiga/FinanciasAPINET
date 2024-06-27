@@ -1,5 +1,5 @@
 using System.ComponentModel.DataAnnotations;
-using financias.src.validation;
+using financias.src.validations;
 
 namespace financias.src.DTOs
 {
