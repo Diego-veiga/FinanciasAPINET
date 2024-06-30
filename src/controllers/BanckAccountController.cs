@@ -1,8 +1,11 @@
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using financias.src.commands.BanckAccount;
 using financias.src.query.BanckAccount;
 using FluentValidation;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.JSInterop;
 
 namespace financias.src.controllers
 {
@@ -11,17 +14,23 @@ namespace financias.src.controllers
     public class BanckAccountController : ControllerBase
     {
         public IMediator _mediator { get; set; }
+        public ILogger<BanckAccountController> _logger { get; set; }
     
-        public BanckAccountController(IMediator mediator,IValidator<CreateBanckAcconutCommand>  validator)
+        public BanckAccountController(IMediator mediator,ILogger<BanckAccountController> logger)
         {
             _mediator = mediator;
+            _logger =logger;
         }
 
         [HttpPost]
         public async Task<IActionResult> Create(CreateBanckAcconutCommand createBanckAcconutCommand)
         {  
 
+   
+            _logger.LogInformation($"Start endepoint create with object {JsonSerializer.Serialize(createBanckAcconutCommand)}");
+
             createBanckAcconutCommand.UserId = Guid.Parse(User.Claims.First(c => c.Type == "id").Value);
+          
 
             await _mediator.Send(createBanckAcconutCommand);
             return Created();
