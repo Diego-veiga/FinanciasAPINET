@@ -26,11 +26,9 @@ namespace financias.src.controllers
         public async Task<IActionResult> Create(CreateBanckAcconutCommand createBanckAcconutCommand)
         {  
 
-   
-            _logger.LogInformation($"Start endepoint create with object {JsonSerializer.Serialize(createBanckAcconutCommand)}");
+            _logger.LogInformation($"Start endepoint Create with object {JsonSerializer.Serialize(createBanckAcconutCommand)}");
 
             createBanckAcconutCommand.UserId = Guid.Parse(User.Claims.First(c => c.Type == "id").Value);
-          
 
             await _mediator.Send(createBanckAcconutCommand);
             return Created();
@@ -39,6 +37,7 @@ namespace financias.src.controllers
         [HttpPut("{id:guid}")]
         public async Task<IActionResult> Update(UpdateBanckAcconutCommand updateBanckAcconutCommand, Guid id)
         {
+            _logger.LogInformation($"Start endepoint Update with object {JsonSerializer.Serialize(updateBanckAcconutCommand)} and params {id}");
             updateBanckAcconutCommand.Id = id;
 
             await _mediator.Send(updateBanckAcconutCommand);
@@ -48,7 +47,7 @@ namespace financias.src.controllers
         [HttpDelete("{id:guid}")]
         public async Task<IActionResult> Delete(Guid id)
         {
-
+            _logger.LogInformation($"Start endepoint Delete with params {id}");
             var deleteBanckAcconutCommand = new DeleteBanckAcconutCommand() { Id = id };
 
             await _mediator.Send(deleteBanckAcconutCommand);

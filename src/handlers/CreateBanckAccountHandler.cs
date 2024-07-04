@@ -18,11 +18,10 @@ namespace financias.src.handlers
             _unitOFWork =unitOFWork;
             _logger = logger;
          }
-        
-
+    
         public async Task Handle(CreateBanckAcconutCommand request, CancellationToken cancellationToken)
         {
-
+            _logger.LogInformation($"Start CreateBanckAccountHandler with request {JsonSerializer.Serialize(request)}");
             _logger.LogInformation($"Handle invoked  with request {JsonSerializer.Serialize(request)}");
             var user = await _unitOFWork.userRepository.GetById(request.UserId);
 
