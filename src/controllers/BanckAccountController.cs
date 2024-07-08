@@ -59,22 +59,35 @@ namespace financias.src.controllers
         [HttpGet("{id:guid}")]
         public async Task<IActionResult> GetById(Guid id)
         {
+            _logger.LogInformation($"Start endepoint GetById with params {id}");
 
             var getBanckAccountById = new GetBanckAccountById() { Id = id };
 
+            _logger.LogInformation($"object created getBanckAccountAllByUserId for the mediator to send {JsonSerializer.Serialize(getBanckAccountById)}");
+
             var result = await _mediator.Send(getBanckAccountById);
+
+            _logger.LogInformation($"Start endepoint GetBanckAccountByIdHandler return object {JsonSerializer.Serialize(result)}");
+
             return result is null ? NotFound("BanckAccount Not found") : Ok(result);
         }
         [HttpGet()]
         public async Task<IActionResult> GetAll()
         {
+            _logger.LogInformation($"Start endepoint GetAll");
+
             var getBanckAccountAllByUserId = new GetBanckAccountAllByUserId()
             {
                     UserId = Guid.Parse(User.Claims.First(c => c.Type == "id").Value)
             };
+            
+            _logger.LogInformation($"object created getBanckAccountAllByUserId for the mediator to send {JsonSerializer.Serialize(getBanckAccountAllByUserId)}");
 
-            var result = await _mediator.Send(getBanckAccountAllByUserId);
-            return result is null ? NotFound("BanckAccount Not found") : Ok(result);
+            var results = await _mediator.Send(getBanckAccountAllByUserId);
+
+            _logger.LogInformation($"Start endepoint GetBanckAccountAllByUserIdHandler return object {JsonSerializer.Serialize(results)}");
+
+            return results is null ? NotFound("BanckAccount Not found") : Ok(results);
         }
 
     }
