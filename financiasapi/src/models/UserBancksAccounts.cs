@@ -1,6 +1,6 @@
 namespace financiasapi.src.models
 {
-    public class UserBancksAccounts
+    public class UserBancksAccounts:BaseEntity
     {
         public Guid UserId { get; set; }
         public Guid BanckAccountId { get; set; }

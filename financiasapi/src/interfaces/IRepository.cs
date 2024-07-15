@@ -1,4 +1,4 @@
-namespace financiasapi.src.interfaces
+namespace financias.src.interfaces
 {
     public interface IRepository<T>
     {
@@ -7,5 +7,6 @@ namespace financiasapi.src.interfaces
         void Add(T entity);
         void Update(T entity);
         void Delete(T entity);
+
     }
 }

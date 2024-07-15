@@ -1,7 +1,7 @@
 using financiasapi.src.dtos;
 using financiasapi.src.models.Enums;
 
-namespace financiasapi.src
+namespace financiasapi.src.dtos
 {
     public class BanckAccountView: BaseEntityView
     {
