@@ -144,3 +144,13 @@ WHERE [u].[Email] = @__email_0
 2024-07-15 20:48:44.302 -03:00 [ERR] Email or passwrod invalid
 2024-07-15 20:48:44.303 -03:00 [INF] HTTP POST /api/Token responded 400 in 1037.8976 ms
 2024-07-15 20:48:44.307 -03:00 [INF] Request finished HTTP/2 POST https://localhost:7283/api/Token - 400 null application/json 1042.4074ms
+2024-07-15 20:55:39.782 -03:00 [INF] User profile is available. Using 'C:\Users\Usuário\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2024-07-15 20:55:39.938 -03:00 [INF] Now listening on: https://localhost:7283
+2024-07-15 20:55:39.938 -03:00 [INF] Now listening on: http://localhost:5236
+2024-07-15 20:55:39.940 -03:00 [INF] Application started. Press Ctrl+C to shut down.
+2024-07-15 20:55:39.940 -03:00 [INF] Hosting environment: Development
+2024-07-15 20:55:39.940 -03:00 [INF] Content root path: C:\Users\Usuário\Documents\Estudos\Codigo\Udemy\dotnet\macoratte\Pratica\Financias\financiasapi
+2024-07-15 20:55:40.118 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7283/index.html - null null
+2024-07-15 20:55:40.249 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7283/index.html - 200 null text/html;charset=utf-8 130.8322ms
+2024-07-15 20:55:40.375 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7283/swagger/v1/swagger.json - null null
+2024-07-15 20:55:40.450 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7283/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 74.4497ms
