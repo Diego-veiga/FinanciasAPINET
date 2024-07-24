@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace financias.src.database.Mapping
 {
-    public class BanckMapping : IEntityTypeConfiguration<Banck>
+    public class BankMapping : IEntityTypeConfiguration<Bank>
     {
-        public void Configure(EntityTypeBuilder<Banck> builder)
+        public void Configure(EntityTypeBuilder<Bank> builder)
         {
             builder.HasKey(o => o.Id);
 
@@ -23,7 +23,7 @@ namespace financias.src.database.Mapping
                    .HasForeignKey(b => b.UserId)
                    .OnDelete(DeleteBehavior.NoAction);
             builder.HasData(
-             new Banck
+             new Bank
              {
                  Id = Guid.Parse("aff79997-841c-4cb4-a4e6-84d4f0e00e8d"),
                  Name = "Itau",
@@ -31,7 +31,7 @@ namespace financias.src.database.Mapping
                  Active = true,
                  CreatedAt = DateTime.Now
              },
-             new Banck
+             new Bank
              {
                  Id = Guid.Parse("81a3902a-89b7-459e-a665-2a346ae829e1"),
                  Name = "Bradesco",
@@ -39,7 +39,7 @@ namespace financias.src.database.Mapping
                  Active = true,
                  CreatedAt = DateTime.Now
              },
-             new Banck
+             new Bank
              {
                  Id = Guid.Parse("16d9075f-2ced-4358-be10-4cfeefac8647"),
                  Name = "Santander",

@@ -4,7 +4,7 @@ using financiasapi.src.validations;
 
 namespace financiasapi.src.dtos
 {
-    public class CreateBanck
+    public class CreateBank
     {
          [CnpjCPFValidation]
         public string Cnpj { get; set; }

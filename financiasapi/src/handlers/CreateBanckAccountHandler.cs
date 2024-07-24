@@ -31,7 +31,7 @@ namespace financias.src.handlers
                 throw new ApplicationException("User not found");
             }
 
-            var banck = await _unitOFWork.banckRepository.GetById(request.BanckId);
+            var banck = await _unitOFWork.bankRepository.GetById(request.BanckId);
 
              _logger.LogInformation($"Banck found {JsonSerializer.Serialize(banck)}");
 

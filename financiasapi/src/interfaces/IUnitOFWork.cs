@@ -4,7 +4,7 @@ namespace financias.src.interfaces
     public interface IUnitOFWork
     {
         IUserRepository userRepository { get; }
-        IBanckRepository banckRepository { get; }
+        IBankRepository bankRepository { get; }
         IBanckAccountRepository banckAccountRepository { get; }
         IUserBancksAccountsRepository userBancksAccountsRepository { get; }
         Task Commit();

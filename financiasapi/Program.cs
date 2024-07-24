@@ -59,11 +59,10 @@ builder.Services.AddScoped<IUnitOFWork, UnitOfWork>();
 builder.Services.AddScoped<IUserService, UserServices>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<ITokenService, TokenService>();
-builder.Services.AddScoped<IBanckRepository, BanckRepository>();
-builder.Services.AddScoped<IBanckService, BanckService>();
-builder.Services.AddScoped<IBanckService, BanckService>();
+builder.Services.AddScoped<IBankRepository, BankRepository>();
+builder.Services.AddScoped<IBankService, BankService>();
 builder.Services.AddScoped<ICachingService, CachingService>();
-builder.Services.AddAutoMapper(typeof(BanckMapping).Assembly);
+builder.Services.AddAutoMapper(typeof(BankMapping).Assembly);
 
 builder.Services.AddStackExchangeRedisCache(o =>
 {

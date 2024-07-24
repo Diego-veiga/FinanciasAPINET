@@ -27,7 +27,7 @@ namespace financias.src.handlers
             }
             _logger.LogInformation($"BackAccount found {JsonSerializer.Serialize(backAccount)}");
 
-            var banck = await _unitOFWork.banckRepository.GetById(request.BanckId);
+            var banck = await _unitOFWork.bankRepository.GetById(request.BanckId);
             _logger.LogInformation($"Back found {JsonSerializer.Serialize(banck)}");
             if(banck is null){
                 throw new ApplicationException("Banck not found");

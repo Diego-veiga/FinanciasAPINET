@@ -1,6 +1,6 @@
 namespace financiasapi.src.dtos
 {
-    public class BanckView
+    public class BankView
     {
         public Guid Id { get; set; }
         public string Name { get; set; }

@@ -6,7 +6,7 @@ namespace financias.src.Repository
     public class UnitOfWork : IUnitOFWork
     {
         private UserRepository _userRepository;
-        private BanckRepository _banckRepository;
+        private BankRepository _bankRepository;
         private BanckAccountRepository _banckAccountRepository;
         private UserBanckAccountRepository _userBanckAccountRepository;
         public AppDbContext _context;
@@ -25,11 +25,11 @@ namespace financias.src.Repository
             }
         }
 
-        public IBanckRepository banckRepository
+        public IBankRepository bankRepository
         {
             get
             {
-                return _banckRepository = _banckRepository ?? new BanckRepository(_context);
+                return _bankRepository = _bankRepository ?? new BankRepository(_context);
 
             }
         }

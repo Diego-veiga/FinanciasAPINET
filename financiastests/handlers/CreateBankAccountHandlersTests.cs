@@ -31,13 +31,13 @@ namespace financiastests.handlers
         {
                         
             var user = fixture.Create<User>();
-            var bank = fixture.Create<Banck>();
+            var bank = fixture.Create<Bank>();
             var createBankAccountCommand = fixture.Create<CreateBanckAcconutCommand>();
             createBankAccountCommand.Type="Current";
 
             var cancellationToken = fixture.Create<CancellationToken>();
             _unitOfWorkMock.Setup(uow => uow.userRepository.GetById(It.IsAny<Guid>())).ReturnsAsync(user);
-            _unitOfWorkMock.Setup(uow => uow.banckRepository.GetById(It.IsAny<Guid>())).ReturnsAsync(bank);
+            _unitOfWorkMock.Setup(uow => uow.bankRepository.GetById(It.IsAny<Guid>())).ReturnsAsync(bank);
             _unitOfWorkMock.Setup(uow => uow.banckAccountRepository.Add(It.IsAny<BanckAccount>()));
             _unitOfWorkMock.Setup(uow => uow.userBancksAccountsRepository.Add(It.IsAny<UserBancksAccounts>()));
          
@@ -57,13 +57,13 @@ namespace financiastests.handlers
         {
                         
             var user = fixture.Create<User>();
-            var bank = fixture.Create<Banck>();
+            var bank = fixture.Create<Bank>();
             var createBankAccountCommand = fixture.Create<CreateBanckAcconutCommand>();
             createBankAccountCommand.Type="Current";
 
             var cancellationToken = fixture.Create<CancellationToken>();
             _unitOfWorkMock.Setup(uow => uow.userRepository.GetById(It.IsAny<Guid>()));
-            _unitOfWorkMock.Setup(uow => uow.banckRepository.GetById(It.IsAny<Guid>())).ReturnsAsync(bank);
+            _unitOfWorkMock.Setup(uow => uow.bankRepository.GetById(It.IsAny<Guid>())).ReturnsAsync(bank);
             _unitOfWorkMock.Setup(uow => uow.banckAccountRepository.Add(It.IsAny<BanckAccount>()));
             _unitOfWorkMock.Setup(uow => uow.userBancksAccountsRepository.Add(It.IsAny<UserBancksAccounts>()));
          
@@ -75,7 +75,7 @@ namespace financiastests.handlers
             Assert.Equal("User not found", exception.Message);
 
             _unitOfWorkMock.Verify(c => c.userRepository.GetById(It.IsAny<Guid>()), Times.Once());
-            _unitOfWorkMock.Verify(c => c.banckRepository.GetById(It.IsAny<Guid>()), Times.Never());
+            _unitOfWorkMock.Verify(c => c.bankRepository.GetById(It.IsAny<Guid>()), Times.Never());
             _unitOfWorkMock.Verify(c => c.banckAccountRepository.Add(It.IsAny<BanckAccount>()), Times.Never());
             _unitOfWorkMock.Verify(c => c.userBancksAccountsRepository.Add(It.IsAny<UserBancksAccounts>()), Times.Never());
             _unitOfWorkMock.Verify(c => c.Commit(), Times.Never());
@@ -85,13 +85,13 @@ namespace financiastests.handlers
         public async Task Handler_BankNotFound_ReturnErrorBankNotFound()
         {             
             var user = fixture.Create<User>();
-            var bank = fixture.Create<Banck>();
+            var bank = fixture.Create<Bank>();
             var createBankAccountCommand = fixture.Create<CreateBanckAcconutCommand>();
             createBankAccountCommand.Type="Current";
 
             var cancellationToken = fixture.Create<CancellationToken>();
             _unitOfWorkMock.Setup(uow => uow.userRepository.GetById(It.IsAny<Guid>())).ReturnsAsync(user);
-            _unitOfWorkMock.Setup(uow => uow.banckRepository.GetById(It.IsAny<Guid>()));
+            _unitOfWorkMock.Setup(uow => uow.bankRepository.GetById(It.IsAny<Guid>()));
             _unitOfWorkMock.Setup(uow => uow.banckAccountRepository.Add(It.IsAny<BanckAccount>()));
             _unitOfWorkMock.Setup(uow => uow.userBancksAccountsRepository.Add(It.IsAny<UserBancksAccounts>()));
          
@@ -103,7 +103,7 @@ namespace financiastests.handlers
             Assert.Equal("Banck not found", exception.Message);
 
             _unitOfWorkMock.Verify(c => c.userRepository.GetById(It.IsAny<Guid>()), Times.Once());
-            _unitOfWorkMock.Verify(c => c.banckRepository.GetById(It.IsAny<Guid>()), Times.Once());
+            _unitOfWorkMock.Verify(c => c.bankRepository.GetById(It.IsAny<Guid>()), Times.Once());
             _unitOfWorkMock.Verify(c => c.banckAccountRepository.Add(It.IsAny<BanckAccount>()), Times.Never());
             _unitOfWorkMock.Verify(c => c.userBancksAccountsRepository.Add(It.IsAny<UserBancksAccounts>()), Times.Never());
             _unitOfWorkMock.Verify(c => c.Commit(), Times.Never());

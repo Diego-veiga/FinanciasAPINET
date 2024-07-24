@@ -6,26 +6,26 @@ using Microsoft.EntityFrameworkCore;
 
 namespace financias.src.services
 {
-    public class BanckService : IBanckService
+    public class BankService : IBankService
     {
         private IUnitOFWork _unitOFWork;
         private readonly IMapper _mapper;
-        public BanckService(IUnitOFWork unitOFWork, IMapper mapper)
+        public BankService(IUnitOFWork unitOFWork, IMapper mapper)
         {
             _unitOFWork = unitOFWork;
             _mapper = mapper;
 
         }
-        public async Task Create(CreateBanck createBanck)
+        public async Task Create(CreateBank createBank)
         {
-            var user = _mapper.Map<Banck>(createBanck);
-            _unitOFWork.banckRepository.Add(user!);
+            var user = _mapper.Map<Bank>(createBank);
+            _unitOFWork.bankRepository.Add(user!);
             await _unitOFWork.Commit();
         }
 
         public async Task Delete(Guid id)
         {
-            var banck = await _unitOFWork.banckRepository.GetById(id);
+            var banck = await _unitOFWork.bankRepository.GetById(id);
             if (banck is null)
             {
                 throw new ApplicationException("banck not found ");
@@ -37,40 +37,40 @@ namespace financias.src.services
             }
 
             banck.Active = false;
-            _unitOFWork.banckRepository.Delete(banck!);
+            _unitOFWork.bankRepository.Delete(banck!);
             await _unitOFWork.Commit();
 
         }
 
-        public async Task<List<BanckView>> GetActive(Guid userId)
+        public async Task<List<BankView>> GetActive(Guid userId)
         {
-            var bancks = await _unitOFWork.banckRepository
+            var bancks = await _unitOFWork.bankRepository
             .Get()
             .Where(b => b.UserId == userId || b.UserId == null)
             .ToListAsync();
-            return _mapper.Map<List<BanckView>>(bancks);
+            return _mapper.Map<List<BankView>>(bancks);
         }
 
-        public async Task<BanckView> GetById(Guid id)
+        public async Task<BankView> GetById(Guid id)
         {
-            var banck = await _unitOFWork.banckRepository.GetById(id);
+            var banck = await _unitOFWork.bankRepository.GetById(id);
             if (banck is null)
             {
                 throw new ApplicationException("banck not found ");
             }
-            return _mapper.Map<BanckView>(banck);
+            return _mapper.Map<BankView>(banck);
 
         }
 
-        public async Task<List<BanckView>> GetByUserId(Guid userId)
+        public async Task<List<BankView>> GetByUserId(Guid userId)
         {
-            var banck = await _unitOFWork.banckRepository.GetByUserId(userId);
-            return _mapper.Map<List<BanckView>>(banck);
+            var banck = await _unitOFWork.bankRepository.GetByUserId(userId);
+            return _mapper.Map<List<BankView>>(banck);
         }
 
-        public async Task Update(UpdateBanck updateBanck)
+        public async Task Update(UpdateBank updateBanck)
         {
-            var banck = await _unitOFWork.banckRepository.GetById(updateBanck.Id);
+            var banck = await _unitOFWork.bankRepository.GetById(updateBanck.Id);
 
             if (banck is null)
             {
@@ -79,7 +79,7 @@ namespace financias.src.services
             banck.Cnpj = updateBanck.Cnpj.Replace(".", string.Empty).Replace("-", string.Empty).Replace("/", string.Empty);
             banck.Name = updateBanck.Name;
             banck.UpdatedAt = DateTime.Now;
-            _unitOFWork.banckRepository.Update(banck!);
+            _unitOFWork.bankRepository.Update(banck!);
             await _unitOFWork.Commit();
         }
     }

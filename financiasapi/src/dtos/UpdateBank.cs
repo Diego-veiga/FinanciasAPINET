@@ -4,7 +4,7 @@ using financiasapi.src.validations;
 
 namespace financiasapi.src.dtos
 {
-    public class UpdateBanck
+    public class UpdateBank
     {
        [Obsolete]
         public Guid Id { get; set; }

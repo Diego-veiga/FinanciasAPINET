@@ -1,7 +1,7 @@
 
 namespace financiasapi.src.models
 {
-    public class Banck: BaseEntity
+    public class Bank: BaseEntity
     {
        public string Cnpj { get; set; }
         public string Name { get; set; }

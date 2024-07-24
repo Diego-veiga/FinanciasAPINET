@@ -6,15 +6,15 @@ using Microsoft.EntityFrameworkCore;
 
 namespace financias.src.Repository
 {
-    public class BanckRepository : BaseRepository<Banck>, IBanckRepository
+    public class BankRepository : BaseRepository<Bank>, IBankRepository
     {
-        public BanckRepository(AppDbContext context) : base(context)
+        public BankRepository(AppDbContext context) : base(context)
         {
 
         }
-        public async Task<List<Banck>> GetByUserId(Guid userId)
+        public async Task<List<Bank>> GetByUserId(Guid userId)
         {
-            return await _context.Bancks.Where(u => u.UserId == userId)
+            return await _context.Banks.Where(u => u.UserId == userId)
                                         .Include(u => u.User)
                                         .ToListAsync();
         }
