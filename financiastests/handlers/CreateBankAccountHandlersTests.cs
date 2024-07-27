@@ -12,36 +12,37 @@ namespace financiastests.handlers
 {
     public class CreateBankAccountHandlersTests
     {
-        public readonly Fixture fixture ;
+        public readonly Fixture _fixture ;
         public Mock<IUnitOFWork> _unitOfWorkMock { get; set; }
-        public Mock<ILogger<CreateBanckAccountHandler>> loggerMock { get; set; }
+        public Mock<ILogger<CreateBankAccountHandler>> _loggerMock { get; set; }
         public CreateBankAccountHandlersTests()
         {
-            fixture = new Fixture();
-                fixture.Behaviors.OfType<ThrowingRecursionBehavior>().ToList()
-                    .ForEach(b => fixture.Behaviors.Remove(b));
-                    fixture.Behaviors.Add(new OmitOnRecursionBehavior(1));
+            _fixture = new Fixture();
+                _fixture.Behaviors.OfType<ThrowingRecursionBehavior>().ToList()
+                    .ForEach(b => _fixture.Behaviors.Remove(b));
+                    _fixture.Behaviors.Add(new OmitOnRecursionBehavior(1));
             _unitOfWorkMock = new Mock<IUnitOFWork>();
            
-            loggerMock = new Mock<ILogger<CreateBanckAccountHandler>>();
+            _loggerMock = new Mock<ILogger<CreateBankAccountHandler>>();
         }
-
+        
+        [Trait("Handler", "CreateBankAccountHandler")]
         [Fact]
         public async void Handler_ValidCommand_CreateBankAccountSuccessful()
         {
                         
-            var user = fixture.Create<User>();
-            var bank = fixture.Create<Bank>();
-            var createBankAccountCommand = fixture.Create<CreateBanckAcconutCommand>();
+            var user = _fixture.Create<User>();
+            var bank = _fixture.Create<Bank>();
+            var createBankAccountCommand = _fixture.Create<CreateBankAccountCommand>();
             createBankAccountCommand.Type="Current";
 
-            var cancellationToken = fixture.Create<CancellationToken>();
+            var cancellationToken = _fixture.Create<CancellationToken>();
             _unitOfWorkMock.Setup(uow => uow.userRepository.GetById(It.IsAny<Guid>())).ReturnsAsync(user);
             _unitOfWorkMock.Setup(uow => uow.bankRepository.GetById(It.IsAny<Guid>())).ReturnsAsync(bank);
             _unitOfWorkMock.Setup(uow => uow.banckAccountRepository.Add(It.IsAny<BanckAccount>()));
             _unitOfWorkMock.Setup(uow => uow.userBancksAccountsRepository.Add(It.IsAny<UserBancksAccounts>()));
          
-            var handler = new CreateBanckAccountHandler(_unitOfWorkMock.Object, loggerMock.Object);
+            var handler = new CreateBankAccountHandler(_unitOfWorkMock.Object, _loggerMock.Object);
 
            await handler.Handle(createBankAccountCommand, cancellationToken);
 
@@ -54,20 +55,19 @@ namespace financiastests.handlers
 
          [Fact]
         public async Task Handler_UserNotFound_ReturnErrorUserNotFound()
-        {
-                        
-            var user = fixture.Create<User>();
-            var bank = fixture.Create<Bank>();
-            var createBankAccountCommand = fixture.Create<CreateBanckAcconutCommand>();
+        {      
+            var user = _fixture.Create<User>();
+            var bank = _fixture.Create<Bank>();
+            var createBankAccountCommand = _fixture.Create<CreateBankAccountCommand>();
             createBankAccountCommand.Type="Current";
 
-            var cancellationToken = fixture.Create<CancellationToken>();
+            var cancellationToken = _fixture.Create<CancellationToken>();
             _unitOfWorkMock.Setup(uow => uow.userRepository.GetById(It.IsAny<Guid>()));
             _unitOfWorkMock.Setup(uow => uow.bankRepository.GetById(It.IsAny<Guid>())).ReturnsAsync(bank);
             _unitOfWorkMock.Setup(uow => uow.banckAccountRepository.Add(It.IsAny<BanckAccount>()));
             _unitOfWorkMock.Setup(uow => uow.userBancksAccountsRepository.Add(It.IsAny<UserBancksAccounts>()));
          
-            var handler = new CreateBanckAccountHandler(_unitOfWorkMock.Object, loggerMock.Object);
+            var handler = new CreateBankAccountHandler(_unitOfWorkMock.Object, _loggerMock.Object);
 
            var exception = await Assert.ThrowsAsync<ApplicationException>(() => 
 	                   handler.Handle(createBankAccountCommand, cancellationToken));
@@ -84,18 +84,18 @@ namespace financiastests.handlers
          [Fact]
         public async Task Handler_BankNotFound_ReturnErrorBankNotFound()
         {             
-            var user = fixture.Create<User>();
-            var bank = fixture.Create<Bank>();
-            var createBankAccountCommand = fixture.Create<CreateBanckAcconutCommand>();
+            var user = _fixture.Create<User>();
+            var bank = _fixture.Create<Bank>();
+            var createBankAccountCommand = _fixture.Create<CreateBankAccountCommand>();
             createBankAccountCommand.Type="Current";
 
-            var cancellationToken = fixture.Create<CancellationToken>();
+            var cancellationToken = _fixture.Create<CancellationToken>();
             _unitOfWorkMock.Setup(uow => uow.userRepository.GetById(It.IsAny<Guid>())).ReturnsAsync(user);
             _unitOfWorkMock.Setup(uow => uow.bankRepository.GetById(It.IsAny<Guid>()));
             _unitOfWorkMock.Setup(uow => uow.banckAccountRepository.Add(It.IsAny<BanckAccount>()));
             _unitOfWorkMock.Setup(uow => uow.userBancksAccountsRepository.Add(It.IsAny<UserBancksAccounts>()));
          
-            var handler = new CreateBanckAccountHandler(_unitOfWorkMock.Object, loggerMock.Object);
+            var handler = new CreateBankAccountHandler(_unitOfWorkMock.Object, _loggerMock.Object);
 
            var exception = await Assert.ThrowsAsync<ApplicationException>(() => 
 	                   handler.Handle(createBankAccountCommand, cancellationToken));
