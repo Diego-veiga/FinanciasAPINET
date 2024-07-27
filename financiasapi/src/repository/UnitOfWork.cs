@@ -7,7 +7,7 @@ namespace financias.src.Repository
     {
         private UserRepository _userRepository;
         private BankRepository _bankRepository;
-        private BanckAccountRepository _banckAccountRepository;
+        private BankAccountRepository _bankAccountRepository;
         private UserBanckAccountRepository _userBanckAccountRepository;
         public AppDbContext _context;
 
@@ -33,14 +33,15 @@ namespace financias.src.Repository
 
             }
         }
-        public IBanckAccountRepository banckAccountRepository
+        public IBankAccountRepository bankAccountRepository
         {
             get
             {
-                return _banckAccountRepository = _banckAccountRepository ?? new BanckAccountRepository(_context);
+                return _bankAccountRepository = _bankAccountRepository ?? new BankAccountRepository(_context);
 
             }
         }
+
         public IUserBancksAccountsRepository userBancksAccountsRepository
         {
             get
@@ -50,7 +51,6 @@ namespace financias.src.Repository
             }
         }
 
-        
         public async Task Commit()
         {
             await _context.SaveChangesAsync();

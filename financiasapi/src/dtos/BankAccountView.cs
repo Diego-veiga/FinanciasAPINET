@@ -3,7 +3,7 @@ using financiasapi.src.models.Enums;
 
 namespace financiasapi.src.dtos
 {
-    public class BanckAccountView: BaseEntityView
+    public class BankAccountView: BaseEntityView
     {
         public string Name { get; set; }
         public double Balance { get; set; }

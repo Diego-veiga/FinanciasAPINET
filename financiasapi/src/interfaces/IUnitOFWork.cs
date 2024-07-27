@@ -5,7 +5,7 @@ namespace financias.src.interfaces
     {
         IUserRepository userRepository { get; }
         IBankRepository bankRepository { get; }
-        IBanckAccountRepository banckAccountRepository { get; }
+        IBankAccountRepository bankAccountRepository { get; }
         IUserBancksAccountsRepository userBancksAccountsRepository { get; }
         Task Commit();
     }

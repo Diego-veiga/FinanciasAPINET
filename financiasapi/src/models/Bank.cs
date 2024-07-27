@@ -7,6 +7,6 @@ namespace financiasapi.src.models
         public string Name { get; set; }
         public Guid? UserId { get; set; }
         public User? User { get; set; }
-        public ICollection<BanckAccount> BanckAccounts { get; set; } 
+        public ICollection<BankAccount> BankAccounts { get; set; } 
     }
 }

@@ -7,13 +7,13 @@ using MediatR;
 
 namespace financias.src.handlers
 {
-    public class GetBanckAccountByIdHandler : IRequestHandler<GetBanckAccountById, BanckAccountView>
+    public class GetBanckAccountByIdHandler : IRequestHandler<GetBankAccountById, BankAccountView>
     {
         private IUnitOFWork _unitOFWork;
         private readonly IMapper _mapper;
-        public ILogger<GetBanckAccountAllByUserIdHandler> _logger { get; set; }
+        public ILogger<GetBankAccountAllByUserIdHandler> _logger { get; set; }
 
-        public GetBanckAccountByIdHandler(IUnitOFWork unitOFWork, IMapper mapper,ILogger<GetBanckAccountAllByUserIdHandler> logger)
+        public GetBanckAccountByIdHandler(IUnitOFWork unitOFWork, IMapper mapper,ILogger<GetBankAccountAllByUserIdHandler> logger)
         {
             _unitOFWork = unitOFWork;
             _mapper = mapper;
@@ -21,7 +21,7 @@ namespace financias.src.handlers
 
         }
 
-        public async Task<BanckAccountView> Handle(GetBanckAccountById request, CancellationToken cancellationToken)
+        public async Task<BankAccountView> Handle(GetBankAccountById request, CancellationToken cancellationToken)
         {
             _logger.LogInformation($"Start GetBanckAccountByIdHandler with request {JsonSerializer.Serialize(request)}");
 
@@ -38,7 +38,7 @@ namespace financias.src.handlers
 
             _logger.LogInformation("Starting mappper from banckAccount to banckAccoutnView.");
 
-            var banckAccoutnView = _mapper.Map<BanckAccountView>(banckAccount);
+            var banckAccoutnView = _mapper.Map<BankAccountView>(banckAccount);
 
             _logger.LogInformation($"returning banckAccoutnView {JsonSerializer.Serialize(banckAccoutnView)}");
 

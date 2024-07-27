@@ -3,21 +3,21 @@ using financiasapi.src.models.Enums;
 
 namespace financiasapi.src.models
 {
-    public class BanckAccount: BaseEntity
+    public class BankAccount: BaseEntity
     {
          public string Name { get; set; }
         public double Balance { get; set; }
         public AccountType Type { get; set; }
-        public Guid BanckId { get; set; }
-        public Bank Banck { get; set; }
-        public ICollection<UserBancksAccounts> UserBancksAccounts { get; set; }
+        public Guid BankId { get; set; }
+        public Bank Bank { get; set; }
+        public ICollection<UserBancksAccounts> UserBanksAccounts { get; set; }
 
-        public BanckAccount(Guid id,string name, AccountType type, Guid banckId, bool active, DateTime createdAt, DateTime updatedAt)
+        public BankAccount(Guid id,string name, AccountType type, Guid bankId, bool active, DateTime createdAt, DateTime updatedAt)
         {
             Id= id;
             Name = name;
             Type = type;
-            BanckId = banckId;
+            BankId = bankId;
             Active = active;
             CreatedAt =createdAt;
             UpdatedAt = updatedAt;

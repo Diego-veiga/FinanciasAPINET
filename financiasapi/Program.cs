@@ -1,6 +1,6 @@
 using System.Text;
 using financias.src.caching;
-using financias.src.commands.BanckAccount;
+using financias.src.commands.BankAccount;
 using financias.src.database.Context;
 using financias.src.database.Mapping;
 using financias.src.interfaces;
@@ -20,7 +20,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 
 builder.Services.AddControllers()
-                .AddFluentValidation(config => config.RegisterValidatorsFromAssemblyContaining<CreateBanckAcconutCommand>());
+                .AddFluentValidation(config => config.RegisterValidatorsFromAssemblyContaining<CreateBankAccountCommand>());
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddMediatR(cf => cf.RegisterServicesFromAssembly(typeof(Program).Assembly));
 builder.Services.AddSwaggerGen(c =>

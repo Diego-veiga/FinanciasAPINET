@@ -1,6 +1,6 @@
 
 using System.Text.Json;
-using financias.src.commands.BanckAccount;
+using financias.src.commands.BankAccount;
 using financias.src.interfaces;
 using financiasapi.src.models;
 using financiasapi.src.models.Enums;
@@ -8,20 +8,20 @@ using MediatR;
 
 namespace financias.src.handlers
 {
-    public class CreateBanckAccountHandler : IRequestHandler<CreateBanckAcconutCommand>
+    public class CreateBankAccountHandler : IRequestHandler<CreateBankAccountCommand>
     {
          private IUnitOFWork _unitOFWork;
-         public ILogger<CreateBanckAccountHandler> _logger { get; set; }
+         public ILogger<CreateBankAccountHandler> _logger { get; set; }
 
-         public CreateBanckAccountHandler(IUnitOFWork unitOFWork,ILogger<CreateBanckAccountHandler> logger)
+         public CreateBankAccountHandler(IUnitOFWork unitOFWork,ILogger<CreateBankAccountHandler> logger)
          {
             _unitOFWork =unitOFWork;
             _logger = logger;
          }
     
-        public async Task Handle(CreateBanckAcconutCommand request, CancellationToken cancellationToken)
+        public async Task Handle(CreateBankAccountCommand request, CancellationToken cancellationToken)
         {
-            _logger.LogInformation($"Start CreateBanckAccountHandler with request {JsonSerializer.Serialize(request)}");
+            _logger.LogInformation($"Start CreateBankAccountHandler with request {JsonSerializer.Serialize(request)}");
             _logger.LogInformation($"Handle invoked  with request {JsonSerializer.Serialize(request)}");
             var user = await _unitOFWork.userRepository.GetById(request.UserId);
 
@@ -42,14 +42,14 @@ namespace financias.src.handlers
             
             _logger.LogInformation($"Strart creating object for insert in database");
 
-            var banckAccount = new BanckAccount(Guid.NewGuid(),request.Name,(AccountType)Enum.Parse(typeof(AccountType), request.Type),request.BanckId,true,DateTime.Now, DateTime.Now);
+            var bankAccount = new BankAccount(Guid.NewGuid(),request.Name,(AccountType)Enum.Parse(typeof(AccountType), request.Type),request.BanckId,true,DateTime.Now, DateTime.Now);
            
-           _logger.LogInformation($"Object BanckAccount created {JsonSerializer.Serialize(banckAccount)}");
+           _logger.LogInformation($"Object BankAccount created {JsonSerializer.Serialize(bankAccount)}");
 
             var userBanckAccount = new UserBancksAccounts()
             {
                 Id=Guid.NewGuid(),
-                BanckAccountId = banckAccount.Id,
+                BankAccountId = bankAccount.Id,
                 UserId=request.UserId,
                 CreatedAt = DateTime.Now,
                 UpdatedAt = DateTime.Now,
@@ -57,15 +57,15 @@ namespace financias.src.handlers
                 Active=true
             };
             
-             _logger.LogInformation($"Object UserBanckAccount created {JsonSerializer.Serialize(userBanckAccount)}");
+             _logger.LogInformation($"Object UserBankAccount created {JsonSerializer.Serialize(userBanckAccount)}");
              _logger.LogInformation("Start Add objects");
 
-             _unitOFWork.banckAccountRepository.Add(banckAccount);
+             _unitOFWork.bankAccountRepository.Add(bankAccount);
              _unitOFWork.userBancksAccountsRepository.Add(userBanckAccount);
              
              
             await _unitOFWork.Commit();
-            _logger.LogInformation("Object Commited Succefull");
+            _logger.LogInformation("Object Committed Successful");
            
         }
     }

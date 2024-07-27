@@ -1,6 +1,6 @@
 using System.Text.Json;
-using financias.src.commands.BanckAccount;
-using financias.src.query.BanckAccount;
+using financias.src.commands.BankAccount;
+using financias.src.query.BankAccount;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,19 +8,19 @@ namespace financias.src.controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class BanckAccountController : ControllerBase
+    public class BankAccountController : ControllerBase
     {
         public IMediator _mediator { get; set; }
-        public ILogger<BanckAccountController> _logger { get; set; }
+        public ILogger<BankAccountController> _logger { get; set; }
     
-        public BanckAccountController(IMediator mediator,ILogger<BanckAccountController> logger)
+        public BankAccountController(IMediator mediator,ILogger<BankAccountController> logger)
         {
             _mediator = mediator;
             _logger =logger;
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(CreateBanckAcconutCommand createBanckAcconutCommand)
+        public async Task<IActionResult> Create(CreateBankAccountCommand createBanckAcconutCommand)
         {  
 
             _logger.LogInformation($"Start endepoint Create with object {JsonSerializer.Serialize(createBanckAcconutCommand)}");
@@ -32,7 +32,7 @@ namespace financias.src.controllers
         }
 
         [HttpPut("{id:guid}")]
-        public async Task<IActionResult> Update(UpdateBanckAcconutCommand updateBanckAcconutCommand, Guid id)
+        public async Task<IActionResult> Update(UpdateBankAccountCommand updateBanckAcconutCommand, Guid id)
         {
             _logger.LogInformation($"Start endepoint Update with object {JsonSerializer.Serialize(updateBanckAcconutCommand)} and params {id}");
             updateBanckAcconutCommand.Id = id;
@@ -45,7 +45,7 @@ namespace financias.src.controllers
         public async Task<IActionResult> Delete(Guid id)
         {
             _logger.LogInformation($"Start endepoint Delete with params {id}");
-            var deleteBanckAcconutCommand = new DeleteBanckAcconutCommand() { Id = id };
+            var deleteBanckAcconutCommand = new DeleteBankAccountCommand() { Id = id };
 
             await _mediator.Send(deleteBanckAcconutCommand);
             return NoContent();
@@ -58,33 +58,33 @@ namespace financias.src.controllers
         {
             _logger.LogInformation($"Start endepoint GetById with params {id}");
 
-            var getBanckAccountById = new GetBanckAccountById() { Id = id };
+            var getBankAccountById = new GetBankAccountById() { Id = id };
 
-            _logger.LogInformation($"object created getBanckAccountAllByUserId for the mediator to send {JsonSerializer.Serialize(getBanckAccountById)}");
+            _logger.LogInformation($"object created getBankAccountAllByUserId for the mediator to send {JsonSerializer.Serialize(getBankAccountById)}");
 
-            var result = await _mediator.Send(getBanckAccountById);
+            var result = await _mediator.Send(getBankAccountById);
 
-            _logger.LogInformation($"Start endepoint GetBanckAccountByIdHandler return object {JsonSerializer.Serialize(result)}");
+            _logger.LogInformation($"Start endpoint GetBankAccountByIdHandler return object {JsonSerializer.Serialize(result)}");
 
-            return result is null ? NotFound("BanckAccount Not found") : Ok(result);
+            return result is null ? NotFound("BankAccount Not found") : Ok(result);
         }
         [HttpGet()]
         public async Task<IActionResult> GetAll()
         {
-            _logger.LogInformation($"Start endepoint GetAll");
+            _logger.LogInformation($"Start endpoint GetAll");
 
-            var getBanckAccountAllByUserId = new GetBanckAccountAllByUserId()
+            var getBankAccountAllByUserId = new GetBankAccountAllByUserId()
             {
                     UserId = Guid.Parse(User.Claims.First(c => c.Type == "id").Value)
             };
             
-            _logger.LogInformation($"object created getBanckAccountAllByUserId for the mediator to send {JsonSerializer.Serialize(getBanckAccountAllByUserId)}");
+            _logger.LogInformation($"object created getBankAccountAllByUserId for the mediator to send {JsonSerializer.Serialize(getBankAccountAllByUserId)}");
 
-            var results = await _mediator.Send(getBanckAccountAllByUserId);
+            var results = await _mediator.Send(getBankAccountAllByUserId);
 
-            _logger.LogInformation($"Start endepoint GetBanckAccountAllByUserIdHandler return object {JsonSerializer.Serialize(results)}");
+            _logger.LogInformation($"Start endepoint GetBankAccountAllByUserIdHandler return object {JsonSerializer.Serialize(results)}");
 
-            return results is null ? NotFound("BanckAccount Not found") : Ok(results);
+            return results is null ? NotFound("BankAccount Not found") : Ok(results);
         }
 
     }

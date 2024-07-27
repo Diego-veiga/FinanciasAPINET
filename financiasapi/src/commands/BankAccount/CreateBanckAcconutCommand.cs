@@ -2,12 +2,10 @@
 using System.Text.Json.Serialization;
 using MediatR;
 
-namespace financias.src.commands.BanckAccount
+namespace financias.src.commands.BankAccount
 {
-    public class UpdateBanckAcconutCommand:IRequest
+    public class CreateBankAccountCommand:IRequest
     {
-        [JsonIgnore]
-       public Guid Id { get; set; }
        public string Name { get; set; }
        public string Type { get; set; }
         public Guid BanckId { get; set; }

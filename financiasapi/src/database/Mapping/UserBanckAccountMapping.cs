@@ -9,9 +9,9 @@ namespace financias.src.database.Mapping
         public void Configure(EntityTypeBuilder<UserBancksAccounts> builder)
         {
             builder.HasKey(uba => uba.Id);
-            builder.HasOne(uba => uba.BanckAccount)
-                   .WithMany(uba =>uba.UserBancksAccounts)
-                   .HasForeignKey(uba => uba.BanckAccountId);
+            builder.HasOne(uba => uba.BankAccount)
+                   .WithMany(uba =>uba.UserBanksAccounts)
+                   .HasForeignKey(uba => uba.BankAccountId);
            
             builder.HasOne(uba => uba.User)
                    .WithMany(uba => uba.UserBancksAccounts)

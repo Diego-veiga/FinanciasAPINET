@@ -5,21 +5,21 @@ using Microsoft.EntityFrameworkCore;
 
 namespace financias.src.Repository
 {
-    public class BanckAccountRepository: BaseRepository<financiasapi.src.models.BanckAccount>, IBanckAccountRepository
+    public class BankAccountRepository: BaseRepository<financiasapi.src.models.BankAccount>, IBankAccountRepository
     {
-        public BanckAccountRepository(AppDbContext context):base(context){
+        public BankAccountRepository(AppDbContext context):base(context){
             
         }
 
-        public async Task<List<financiasapi.src.models.BanckAccount>> GetByUserId(Guid userId)
+        public async Task<List<financiasapi.src.models.BankAccount>> GetByUserId(Guid userId)
         {
            
-                var banckAccountList = await (from ba in _context.BanckAccounts
+                var bankAccountList = await (from ba in _context.BankAccounts
                 join uba in _context.UserBancksAccounts 
                 on ba.Id equals uba.BanckAccountId 
                 where uba.UserId == userId
                 select ba).ToListAsync();
-                return banckAccountList ;                
+                return bankAccountList ;                
         }
     }
 }
