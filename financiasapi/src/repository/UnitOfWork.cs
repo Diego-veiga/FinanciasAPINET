@@ -8,7 +8,7 @@ namespace financias.src.Repository
         private UserRepository _userRepository;
         private BankRepository _bankRepository;
         private BankAccountRepository _bankAccountRepository;
-        private UserBanckAccountRepository _userBanckAccountRepository;
+        private UserBankAccountRepository _userBankAccountRepository;
         public AppDbContext _context;
 
         public UnitOfWork(AppDbContext context)
@@ -42,11 +42,11 @@ namespace financias.src.Repository
             }
         }
 
-        public IUserBancksAccountsRepository userBancksAccountsRepository
+        public IUserBanksAccountsRepository userBanksAccountsRepository
         {
             get
             {
-                return _userBanckAccountRepository = _userBanckAccountRepository ?? new UserBanckAccountRepository(_context);
+                return _userBankAccountRepository = _userBankAccountRepository ?? new UserBankAccountRepository(_context);
 
             }
         }

@@ -10,14 +10,14 @@ namespace financias.src.database.Context
         public DbSet<User> Users { get; set; }
         public DbSet<Bank> Banks { get; set; }
         public DbSet<BankAccount> BankAccounts { get; set; }
-        public DbSet<UserBancksAccounts> UserBancksAccounts { get; set; }
+        public DbSet<UserBanksAccounts> UserBanksAccounts { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new UserMapping());
             modelBuilder.ApplyConfiguration(new BankMapping());
             modelBuilder.ApplyConfiguration(new BankAccountMapping());
-            modelBuilder.ApplyConfiguration(new UserBanckAccountMapping());
+            modelBuilder.ApplyConfiguration(new UserBankAccountMapping());
         }
 
     }

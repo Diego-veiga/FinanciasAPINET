@@ -5,9 +5,9 @@ using financiasapi.src.models;
 
 namespace financias.src.Repository
 {
-    public class UserBanckAccountRepository: BaseRepository<UserBancksAccounts>, IUserBancksAccountsRepository
+    public class UserBankAccountRepository: BaseRepository<UserBanksAccounts>, IUserBanksAccountsRepository
     {
-        public UserBanckAccountRepository(AppDbContext context):base(context){
+        public UserBankAccountRepository(AppDbContext context):base(context){
 
         }
 

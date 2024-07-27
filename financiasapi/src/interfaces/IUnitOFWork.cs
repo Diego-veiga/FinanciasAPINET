@@ -1,4 +1,3 @@
-
 namespace financias.src.interfaces
 {
     public interface IUnitOFWork
@@ -6,7 +5,7 @@ namespace financias.src.interfaces
         IUserRepository userRepository { get; }
         IBankRepository bankRepository { get; }
         IBankAccountRepository bankAccountRepository { get; }
-        IUserBancksAccountsRepository userBancksAccountsRepository { get; }
+        IUserBanksAccountsRepository userBanksAccountsRepository { get; }
         Task Commit();
     }
 }

@@ -15,7 +15,7 @@ namespace financias.src.Repository
         {
            
                 var bankAccountList = await (from ba in _context.BankAccounts
-                join uba in _context.UserBancksAccounts 
+                join uba in _context.UserBanksAccounts 
                 on ba.Id equals uba.BankAccountId 
                 where uba.UserId == userId
                 select ba).ToListAsync();

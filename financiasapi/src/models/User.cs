@@ -9,8 +9,8 @@ namespace financiasapi.src.models
         public string Email { get; set; }
         public string Password { get; set; }
         public byte[] Salt { get; set; }
-        public Collection<Bank> Bancks { get; set; }
-        public ICollection<UserBancksAccounts> UserBancksAccounts { get; set; }
+        public Collection<Bank> Banks { get; set; }
+        public ICollection<UserBanksAccounts> UserBanksAccounts { get; set; }
 
         public User(Guid id, string name, string email, string password, bool active, DateTime createdAt, DateTime updatedAt)
         {

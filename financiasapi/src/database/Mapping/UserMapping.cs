@@ -15,7 +15,7 @@ namespace financias.src.database.Mapping
             builder.Property(u => u.Email)
                     .IsRequired()
                     .HasMaxLength(150);
-            builder.HasMany(u => u.Bancks)
+            builder.HasMany(u => u.Banks)
                     .WithOne(u => u.User)
                     .HasForeignKey(u => u.UserId)
                     .OnDelete(DeleteBehavior.Cascade);

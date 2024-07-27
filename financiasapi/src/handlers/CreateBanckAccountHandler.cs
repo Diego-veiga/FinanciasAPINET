@@ -46,7 +46,7 @@ namespace financias.src.handlers
            
            _logger.LogInformation($"Object BankAccount created {JsonSerializer.Serialize(bankAccount)}");
 
-            var userBanckAccount = new UserBancksAccounts()
+            var userBanckAccount = new UserBanksAccounts()
             {
                 Id=Guid.NewGuid(),
                 BankAccountId = bankAccount.Id,
@@ -61,7 +61,7 @@ namespace financias.src.handlers
              _logger.LogInformation("Start Add objects");
 
              _unitOFWork.bankAccountRepository.Add(bankAccount);
-             _unitOFWork.userBancksAccountsRepository.Add(userBanckAccount);
+             _unitOFWork.userBanksAccountsRepository.Add(userBanckAccount);
              
              
             await _unitOFWork.Commit();

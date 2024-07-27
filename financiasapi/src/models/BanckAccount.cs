@@ -10,7 +10,7 @@ namespace financiasapi.src.models
         public AccountType Type { get; set; }
         public Guid BankId { get; set; }
         public Bank Bank { get; set; }
-        public ICollection<UserBancksAccounts> UserBanksAccounts { get; set; }
+        public ICollection<UserBanksAccounts> UserBanksAccounts { get; set; }
 
         public BankAccount(Guid id,string name, AccountType type, Guid bankId, bool active, DateTime createdAt, DateTime updatedAt)
         {

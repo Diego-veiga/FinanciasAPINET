@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace financias.src.database.Mapping
 {
-    public class UserBanckAccountMapping : IEntityTypeConfiguration<UserBancksAccounts>
+    public class UserBankAccountMapping : IEntityTypeConfiguration<UserBanksAccounts>
     {
-        public void Configure(EntityTypeBuilder<UserBancksAccounts> builder)
+        public void Configure(EntityTypeBuilder<UserBanksAccounts> builder)
         {
             builder.HasKey(uba => uba.Id);
             builder.HasOne(uba => uba.BankAccount)
@@ -14,7 +14,7 @@ namespace financias.src.database.Mapping
                    .HasForeignKey(uba => uba.BankAccountId);
            
             builder.HasOne(uba => uba.User)
-                   .WithMany(uba => uba.UserBancksAccounts)
+                   .WithMany(uba => uba.UserBanksAccounts)
                    .HasForeignKey(uba => uba.UserId);
             builder.Property(uba=>uba.IsAdmin).HasDefaultValue(false);
         

@@ -19,7 +19,7 @@ namespace financias.src.database.Mapping
                    .HasMaxLength(14);
 
             builder.HasOne(b => b.User)
-                   .WithMany(b => b.Bancks)
+                   .WithMany(b => b.Banks)
                    .HasForeignKey(b => b.UserId)
                    .OnDelete(DeleteBehavior.NoAction);
             builder.HasData(
