@@ -1,19 +1,19 @@
 using System.Text.Json;
 using AutoMapper;
 using financias.src.interfaces;
-using financias.src.query.BanckAccount;
+using financias.src.query.BankAccount;
 using financiasapi.src.dtos;
 using MediatR;
 
 namespace financias.src.handlers
 {
-    public class GetBanckAccountByIdHandler : IRequestHandler<GetBankAccountById, BankAccountView>
+    public class GetBankAccountByIdHandler : IRequestHandler<GetBankAccountById, BankAccountView>
     {
         private IUnitOFWork _unitOFWork;
         private readonly IMapper _mapper;
         public ILogger<GetBankAccountAllByUserIdHandler> _logger { get; set; }
 
-        public GetBanckAccountByIdHandler(IUnitOFWork unitOFWork, IMapper mapper,ILogger<GetBankAccountAllByUserIdHandler> logger)
+        public GetBankAccountByIdHandler(IUnitOFWork unitOFWork, IMapper mapper,ILogger<GetBankAccountAllByUserIdHandler> logger)
         {
             _unitOFWork = unitOFWork;
             _mapper = mapper;
@@ -23,26 +23,26 @@ namespace financias.src.handlers
 
         public async Task<BankAccountView> Handle(GetBankAccountById request, CancellationToken cancellationToken)
         {
-            _logger.LogInformation($"Start GetBanckAccountByIdHandler with request {JsonSerializer.Serialize(request)}");
+            _logger.LogInformation($"Start GetBankAccountByIdHandler with request {JsonSerializer.Serialize(request)}");
 
-            var banckAccount = await _unitOFWork.banckAccountRepository.GetById(request.Id);
+            var bankAccount = await _unitOFWork.bankAccountRepository.GetById(request.Id);
 
-            _logger.LogInformation($"Return result banckAccountRepository.GetById {JsonSerializer.Serialize(banckAccount)}");
+            _logger.LogInformation($"Return result bankAccountRepository.GetById {JsonSerializer.Serialize(bankAccount)}");
 
-            if (banckAccount is null)
+            if (bankAccount is null)
             {
-                 _logger.LogInformation($"Returning banckAccount null");
+                 _logger.LogInformation($"Returning bankAccount null");
 
                 return null;
             }
 
-            _logger.LogInformation("Starting mappper from banckAccount to banckAccoutnView.");
+            _logger.LogInformation("Starting mapper from bankAccount to bankAccountView.");
 
-            var banckAccoutnView = _mapper.Map<BankAccountView>(banckAccount);
+            var bankAccountView = _mapper.Map<BankAccountView>(bankAccount);
 
-            _logger.LogInformation($"returning banckAccoutnView {JsonSerializer.Serialize(banckAccoutnView)}");
+            _logger.LogInformation($"returning bankAccountView {JsonSerializer.Serialize(bankAccountView)}");
 
-            return banckAccoutnView;
+            return bankAccountView;
         }
     }
 }

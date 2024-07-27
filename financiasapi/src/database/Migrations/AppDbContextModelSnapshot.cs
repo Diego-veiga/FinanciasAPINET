@@ -56,7 +56,7 @@ namespace financias.database.Migrations
 
                     b.HasIndex("BanckId");
 
-                    b.ToTable("BanckAccounts");
+                    b.ToTable("BanckAccounts", (string)null);
                 });
 
             modelBuilder.Entity("financiasapi.src.models.Bank", b =>
@@ -91,7 +91,7 @@ namespace financias.database.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Banks");
+                    b.ToTable("Banks", (string)null);
 
                     b.HasData(
                         new
@@ -158,7 +158,7 @@ namespace financias.database.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Users");
+                    b.ToTable("Users", (string)null);
                 });
 
             modelBuilder.Entity("financiasapi.src.models.UserBancksAccounts", b =>
@@ -193,7 +193,7 @@ namespace financias.database.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("UserBancksAccounts");
+                    b.ToTable("UserBancksAccounts", (string)null);
                 });
 
             modelBuilder.Entity("financiasapi.src.models.BanckAccount", b =>
