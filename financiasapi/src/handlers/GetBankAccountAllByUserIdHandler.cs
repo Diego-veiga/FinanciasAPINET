@@ -22,12 +22,12 @@ namespace financias.src.handlers
 
         public async Task<List<BankAccountView>> Handle(GetBankAccountAllByUserId request, CancellationToken cancellationToken)
         {
-              _logger.LogInformation($"Start GetBankAccountAllByUserIdHandler with request {JsonSerializer.Serialize(request)}");
+            _logger.LogInformation($"Start GetBankAccountAllByUserIdHandler with request {JsonSerializer.Serialize(request)}");
 
             var bankAccountViews = new List<BankAccountView>();
             var bankAccounts = await _unitOFWork.bankAccountRepository.GetByUserId(request.UserId);
 
-             _logger.LogInformation($"Return result bankAccountRepository.GetByUserId {JsonSerializer.Serialize(bankAccounts)}");
+            _logger.LogInformation($"Return result bankAccountRepository.GetByUserId {JsonSerializer.Serialize(bankAccounts)}");
                                                                        
                                                                        
             if (bankAccounts.Count < 0)
