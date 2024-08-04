@@ -18,7 +18,6 @@ namespace financias.src.handlers
             _unitOFWork = unitOFWork;
             _mapper = mapper;
             _logger=logger;
-
         }
 
         public async Task<BankAccountView> Handle(GetBankAccountById request, CancellationToken cancellationToken)

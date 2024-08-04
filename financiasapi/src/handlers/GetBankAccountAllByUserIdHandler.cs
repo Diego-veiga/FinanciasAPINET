@@ -30,7 +30,7 @@ namespace financias.src.handlers
             _logger.LogInformation($"Return result bankAccountRepository.GetByUserId {JsonSerializer.Serialize(bankAccounts)}");
                                                                        
                                                                        
-            if (bankAccounts.Count < 0)
+            if (bankAccounts.Count < 1)
             {
                 _logger.LogInformation($"returning bankAccountViews {JsonSerializer.Serialize(bankAccountViews)}");
 
