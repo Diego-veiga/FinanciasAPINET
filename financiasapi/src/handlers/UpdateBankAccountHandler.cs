@@ -6,12 +6,12 @@ using MediatR;
 
 namespace financias.src.handlers
 {
-    public class UpdateBanckAccountHandler : IRequestHandler<UpdateBankAccountCommand>
+    public class UpdateBankAccountHandler : IRequestHandler<UpdateBankAccountCommand>
     {
          private IUnitOFWork _unitOFWork;
-         private ILogger<UpdateBanckAccountHandler> _logger { get; set; }
+         private ILogger<UpdateBankAccountHandler> _logger { get; set; }
 
-         public UpdateBanckAccountHandler(IUnitOFWork unitOFWork, ILogger<UpdateBanckAccountHandler> logger)
+         public UpdateBankAccountHandler(IUnitOFWork unitOFWork, ILogger<UpdateBankAccountHandler> logger)
          {
             _unitOFWork =unitOFWork;
             _logger = logger;

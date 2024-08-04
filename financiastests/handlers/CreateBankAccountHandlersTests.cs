@@ -40,7 +40,7 @@ namespace financiastests.handlers
             _unitOfWorkMock.Setup(uow => uow.userRepository.GetById(It.IsAny<Guid>())).ReturnsAsync(user);
             _unitOfWorkMock.Setup(uow => uow.bankRepository.GetById(It.IsAny<Guid>())).ReturnsAsync(bank);
             _unitOfWorkMock.Setup(uow => uow.bankAccountRepository.Add(It.IsAny<BankAccount>()));
-            _unitOfWorkMock.Setup(uow => uow.userBancksAccountsRepository.Add(It.IsAny<UserBancksAccounts>()));
+            _unitOfWorkMock.Setup(uow => uow.userBanksAccountsRepository.Add(It.IsAny<UserBanksAccounts>()));
          
             var handler = new CreateBankAccountHandler(_unitOfWorkMock.Object, _loggerMock.Object);
 
@@ -49,7 +49,7 @@ namespace financiastests.handlers
             _unitOfWorkMock.Verify(c => c.userRepository.GetById(It.IsAny<Guid>()), Times.Once());
             _unitOfWorkMock.Verify(c => c.userRepository.GetById(It.IsAny<Guid>()), Times.Once());
             _unitOfWorkMock.Verify(c => c.bankAccountRepository.Add(It.IsAny<BankAccount>()), Times.Once());
-            _unitOfWorkMock.Verify(c => c.userBancksAccountsRepository.Add(It.IsAny<UserBancksAccounts>()), Times.Once());
+            _unitOfWorkMock.Verify(c => c.userBanksAccountsRepository.Add(It.IsAny<UserBanksAccounts>()), Times.Once());
             _unitOfWorkMock.Verify(c => c.Commit(), Times.Once());
         }
 
@@ -65,7 +65,7 @@ namespace financiastests.handlers
             _unitOfWorkMock.Setup(uow => uow.userRepository.GetById(It.IsAny<Guid>()));
             _unitOfWorkMock.Setup(uow => uow.bankRepository.GetById(It.IsAny<Guid>())).ReturnsAsync(bank);
             _unitOfWorkMock.Setup(uow => uow.bankAccountRepository.Add(It.IsAny<BankAccount>()));
-            _unitOfWorkMock.Setup(uow => uow.userBancksAccountsRepository.Add(It.IsAny<UserBancksAccounts>()));
+            _unitOfWorkMock.Setup(uow => uow.userBanksAccountsRepository.Add(It.IsAny<UserBanksAccounts>()));
          
             var handler = new CreateBankAccountHandler(_unitOfWorkMock.Object, _loggerMock.Object);
 
@@ -77,7 +77,7 @@ namespace financiastests.handlers
             _unitOfWorkMock.Verify(c => c.userRepository.GetById(It.IsAny<Guid>()), Times.Once());
             _unitOfWorkMock.Verify(c => c.bankRepository.GetById(It.IsAny<Guid>()), Times.Never());
             _unitOfWorkMock.Verify(c => c.bankAccountRepository.Add(It.IsAny<BankAccount>()), Times.Never());
-            _unitOfWorkMock.Verify(c => c.userBancksAccountsRepository.Add(It.IsAny<UserBancksAccounts>()), Times.Never());
+            _unitOfWorkMock.Verify(c => c.userBanksAccountsRepository.Add(It.IsAny<UserBanksAccounts>()), Times.Never());
             _unitOfWorkMock.Verify(c => c.Commit(), Times.Never());
         }
 
@@ -93,7 +93,7 @@ namespace financiastests.handlers
             _unitOfWorkMock.Setup(uow => uow.userRepository.GetById(It.IsAny<Guid>())).ReturnsAsync(user);
             _unitOfWorkMock.Setup(uow => uow.bankRepository.GetById(It.IsAny<Guid>()));
             _unitOfWorkMock.Setup(uow => uow.bankAccountRepository.Add(It.IsAny<BankAccount>()));
-            _unitOfWorkMock.Setup(uow => uow.userBancksAccountsRepository.Add(It.IsAny<UserBancksAccounts>()));
+            _unitOfWorkMock.Setup(uow => uow.userBanksAccountsRepository.Add(It.IsAny<UserBanksAccounts>()));
          
             var handler = new CreateBankAccountHandler(_unitOfWorkMock.Object, _loggerMock.Object);
 
@@ -105,7 +105,7 @@ namespace financiastests.handlers
             _unitOfWorkMock.Verify(c => c.userRepository.GetById(It.IsAny<Guid>()), Times.Once());
             _unitOfWorkMock.Verify(c => c.bankRepository.GetById(It.IsAny<Guid>()), Times.Once());
             _unitOfWorkMock.Verify(c => c.bankAccountRepository.Add(It.IsAny<BankAccount>()), Times.Never());
-            _unitOfWorkMock.Verify(c => c.userBancksAccountsRepository.Add(It.IsAny<UserBancksAccounts>()), Times.Never());
+            _unitOfWorkMock.Verify(c => c.userBanksAccountsRepository.Add(It.IsAny<UserBanksAccounts>()), Times.Never());
             _unitOfWorkMock.Verify(c => c.Commit(), Times.Never());
         }
     }
