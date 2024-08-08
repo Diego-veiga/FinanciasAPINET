@@ -14,7 +14,7 @@ namespace financias.src.mapping
                                          .ForMember(b => b.Id, d => d.MapFrom(b => b.Id))
                                          .ForMember(b => b.Name, d => d.MapFrom(b => b.Name))
                                          .ForMember(b => b.Balance, d=> d.MapFrom(d => d.Balance))
-                                         .ForMember(b => b.BanckId, d=> d.MapFrom(d => d.BankId))
+                                         .ForMember(b => b.BankId, d=> d.MapFrom(d => d.BankId))
                                          .ForMember(b => b.CreatedAt, d => d.MapFrom(b => b.CreatedAt))
                                          .ForMember(b => b.Id, d => d.MapFrom(b => b.Id));
         }
