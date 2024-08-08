@@ -7,7 +7,9 @@ using financias.src.interfaces;
 using financias.src.middlewares;
 using financias.src.Repository;
 using financias.src.services;
+using financiasapi.src.middlewares;
 using FluentValidation.AspNetCore;
+using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -23,6 +25,7 @@ builder.Services.AddControllers()
                 .AddFluentValidation(config => config.RegisterValidatorsFromAssemblyContaining<CreateBankAccountCommand>());
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddMediatR(cf => cf.RegisterServicesFromAssembly(typeof(Program).Assembly));
+builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehaviour<,>));
 builder.Services.AddSwaggerGen(c =>
 {
 
@@ -33,7 +36,7 @@ builder.Services.AddSwaggerGen(c =>
         Scheme = "Bearer",
         BearerFormat = "JWT",
         In = ParameterLocation.Header,
-        Description = "Coloqueo o token desta forma Bearer + token"
+        Description = "Coloque o token desta forma Bearer + token"
     });
     c.AddSecurityRequirement(new OpenApiSecurityRequirement
     {
