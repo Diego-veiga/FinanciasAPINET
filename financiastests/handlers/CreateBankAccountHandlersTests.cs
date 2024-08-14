@@ -73,7 +73,6 @@ namespace financiastests.handlers
 	                   handler.Handle(createBankAccountCommand, cancellationToken));
 
             Assert.Equal("User not found", exception.Message);
-
             _unitOfWorkMock.Verify(c => c.userRepository.GetById(It.IsAny<Guid>()), Times.Once());
             _unitOfWorkMock.Verify(c => c.bankRepository.GetById(It.IsAny<Guid>()), Times.Never());
             _unitOfWorkMock.Verify(c => c.bankAccountRepository.Add(It.IsAny<BankAccount>()), Times.Never());
