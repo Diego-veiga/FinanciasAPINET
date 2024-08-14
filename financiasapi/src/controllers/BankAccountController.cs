@@ -2,12 +2,14 @@ using System.Text.Json;
 using financias.src.commands.BankAccount;
 using financias.src.query.BankAccount;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace financias.src.controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+     [Authorize]
     public class BankAccountController : ControllerBase
     {
         public IMediator _mediator { get; set; }
@@ -20,34 +22,34 @@ namespace financias.src.controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(CreateBankAccountCommand createBanckAcconutCommand)
+        public async Task<IActionResult> Create(CreateBankAccountCommand createBankAccountCommand)
         {  
 
-            _logger.LogInformation($"Start endepoint Create with object {JsonSerializer.Serialize(createBanckAcconutCommand)}");
+            _logger.LogInformation($"Start endpoint Create with object {JsonSerializer.Serialize(createBankAccountCommand)}");
 
-            createBanckAcconutCommand.UserId = Guid.Parse(User.Claims.First(c => c.Type == "id").Value);
+            createBankAccountCommand.UserId = Guid.Parse(User.Claims.First(c => c.Type == "id").Value);
 
-            await _mediator.Send(createBanckAcconutCommand);
+            await _mediator.Send(createBankAccountCommand);
             return Created();
         }
 
         [HttpPut("{id:guid}")]
-        public async Task<IActionResult> Update(UpdateBankAccountCommand updateBanckAcconutCommand, Guid id)
+        public async Task<IActionResult> Update(UpdateBankAccountCommand updateBankAccountCommand, Guid id)
         {
-            _logger.LogInformation($"Start endepoint Update with object {JsonSerializer.Serialize(updateBanckAcconutCommand)} and params {id}");
-            updateBanckAcconutCommand.Id = id;
+            _logger.LogInformation($"Start endpoint Update with object {JsonSerializer.Serialize(updateBankAccountCommand)} and params {id}");
+            updateBankAccountCommand.Id = id;
 
-            await _mediator.Send(updateBanckAcconutCommand);
+            await _mediator.Send(updateBankAccountCommand);
             return Ok();
         }
 
         [HttpDelete("{id:guid}")]
         public async Task<IActionResult> Delete(Guid id)
         {
-            _logger.LogInformation($"Start endepoint Delete with params {id}");
-            var deleteBanckAcconutCommand = new DeleteBankAccountCommand() { Id = id };
+            _logger.LogInformation($"Start endpoint Delete with params {id}");
+            var deleteBankAccountCommand = new DeleteBankAccountCommand() { Id = id };
 
-            await _mediator.Send(deleteBanckAcconutCommand);
+            await _mediator.Send(deleteBankAccountCommand);
             return NoContent();
         }
 
@@ -56,7 +58,7 @@ namespace financias.src.controllers
         [HttpGet("{id:guid}")]
         public async Task<IActionResult> GetById(Guid id)
         {
-            _logger.LogInformation($"Start endepoint GetById with params {id}");
+            _logger.LogInformation($"Start endpoint GetById with params {id}");
 
             var getBankAccountById = new GetBankAccountById() { Id = id };
 
@@ -82,7 +84,7 @@ namespace financias.src.controllers
 
             var results = await _mediator.Send(getBankAccountAllByUserId);
 
-            _logger.LogInformation($"Start endepoint GetBankAccountAllByUserIdHandler return object {JsonSerializer.Serialize(results)}");
+            _logger.LogInformation($"Start endpoint GetBankAccountAllByUserIdHandler return object {JsonSerializer.Serialize(results)}");
 
             return results is null ? NotFound("BankAccount Not found") : Ok(results);
         }

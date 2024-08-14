@@ -31,7 +31,7 @@ namespace financias.src.handlers
                 throw new ApplicationException("User not found");
             }
 
-            var banck = await _unitOFWork.bankRepository.GetById(request.BanckId);
+            var banck = await _unitOFWork.bankRepository.GetById(request.BankId);
 
              _logger.LogInformation($"Banck found {JsonSerializer.Serialize(banck)}");
 
@@ -42,7 +42,7 @@ namespace financias.src.handlers
             
             _logger.LogInformation($"Strart creating object for insert in database");
 
-            var bankAccount = new BankAccount(Guid.NewGuid(),request.Name,(AccountType)Enum.Parse(typeof(AccountType), request.Type),request.BanckId,true,DateTime.Now, DateTime.Now);
+            var bankAccount = new BankAccount(Guid.NewGuid(),request.Name,(AccountType)Enum.Parse(typeof(AccountType), request.Type),request.BankId,true,DateTime.Now, DateTime.Now);
            
            _logger.LogInformation($"Object BankAccount created {JsonSerializer.Serialize(bankAccount)}");
 

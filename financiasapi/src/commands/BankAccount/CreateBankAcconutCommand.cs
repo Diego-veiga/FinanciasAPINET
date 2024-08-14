@@ -8,7 +8,7 @@ namespace financias.src.commands.BankAccount
     {
        public string Name { get; set; }
        public string Type { get; set; }
-        public Guid BanckId { get; set; }
+        public Guid BankId { get; set; }
        
         [JsonIgnore]
         public Guid UserId { get; set; }

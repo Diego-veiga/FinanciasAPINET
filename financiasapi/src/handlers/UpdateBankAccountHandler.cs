@@ -27,7 +27,7 @@ namespace financias.src.handlers
             }
             _logger.LogInformation($"BackAccount found {JsonSerializer.Serialize(backAccount)}");
 
-            var banck = await _unitOFWork.bankRepository.GetById(request.BanckId);
+            var banck = await _unitOFWork.bankRepository.GetById(request.BankId);
             _logger.LogInformation($"Back found {JsonSerializer.Serialize(banck)}");
             if(banck is null){
                 throw new ApplicationException("Banck not found");
@@ -36,7 +36,7 @@ namespace financias.src.handlers
 
             backAccount.Name = request.Name;
             backAccount.Type =(AccountType)Enum.Parse(typeof(AccountType), request.Type);
-            backAccount.BankId = request.BanckId;
+            backAccount.BankId = request.BankId;
 
             _logger.LogInformation($"Object BanckAccount created {JsonSerializer.Serialize(backAccount)}");
             _logger.LogInformation("Start Update objects");
