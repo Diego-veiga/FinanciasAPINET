@@ -15,16 +15,11 @@ namespace financiasapi.src.validations.BankAccount
                     .WithMessage("The name of the bank account must have a maximum of 30 characters");
             RuleFor(x => x.BankId)
                    .NotEmpty()
-                   .NotNull()
-                   .WithMessage("BankId is required");
+                   .WithMessage("BankId invalid");
+                   
             RuleFor(x => x.Type)
                    .IsEnumName(typeof(AccountType))
-                   .WithMessage($" Type of BankAccount must be {string.Join(", ", Enum.GetNames(typeof(AccountType)))}");
-                  
-            
-
-
-        }
-        
+                   .WithMessage($"Type of BankAccount must be {string.Join(", ", Enum.GetNames(typeof(AccountType)))}");
+        }   
     }
 }
