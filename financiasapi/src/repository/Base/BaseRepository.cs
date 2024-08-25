@@ -20,6 +20,7 @@ namespace financias.src.Repository.Base
 
         public void Delete(T entity)
         {
+            entity.Active = false;
             _context.Entry(entity).State = EntityState.Modified;
             _context.Set<T>().Update(entity);
         }
