@@ -13,7 +13,7 @@ namespace financias.src.Repository
 
         public async Task<List<financiasapi.src.models.BankAccount>> GetByUserId(Guid userId)
         {
-           
+
                 var bankAccountList = await (from ba in _context.BankAccounts
                 join uba in _context.UserBanksAccounts 
                 on ba.Id equals uba.BankAccountId 

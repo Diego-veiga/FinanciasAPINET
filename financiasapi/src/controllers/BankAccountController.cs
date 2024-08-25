@@ -30,7 +30,8 @@ namespace financias.src.controllers
             createBankAccountCommand.UserId = Guid.Parse(User.Claims.First(c => c.Type == "id").Value);
 
             await _mediator.Send(createBankAccountCommand);
-            return Created();
+             return new CreatedAtRouteResult("GetBankAccount", new { id = createBankAccountCommand.UserId }, createBankAccountCommand);
+            
         }
 
         [HttpPut("{id:guid}")]
@@ -53,9 +54,7 @@ namespace financias.src.controllers
             return NoContent();
         }
 
-
-
-        [HttpGet("{id:guid}")]
+        [HttpGet("{id:guid}", Name ="GetBankAccount")]
         public async Task<IActionResult> GetById(Guid id)
         {
             _logger.LogInformation($"Start endpoint GetById with params {id}");
@@ -70,6 +69,7 @@ namespace financias.src.controllers
 
             return result is null ? NotFound("BankAccount Not found") : Ok(result);
         }
+        
         [HttpGet()]
         public async Task<IActionResult> GetAll()
         {
