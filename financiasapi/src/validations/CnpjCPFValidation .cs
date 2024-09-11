@@ -10,7 +10,7 @@ namespace financiasapi.src.validations {
             {
                 return new ValidationResult("CNPJ/CPF invalid");
             }
-            var teste = CpfCnpjValidate.IsValid((string)value);
+            
             return CpfCnpjValidate.IsValid((string)value)
                                                           ? ValidationResult.Success
                                                          : new ValidationResult("CNPJ/CPF invalid");

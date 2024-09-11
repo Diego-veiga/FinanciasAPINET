@@ -1,7 +1,10 @@
 using financias.src.interfaces;
+using financiasapi.src.commands.Bank;
 using financiasapi.src.dtos;
+using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Text.Json;
 
 namespace financias.src.controllers
 {
@@ -10,20 +13,28 @@ namespace financias.src.controllers
     [Authorize]
     public class BankControllers : ControllerBase
     {
+        public IMediator _mediator { get; set; }
+        public ILogger<BankControllers> _logger { get; set; }
         private readonly IBankService _bankService;
-        public BankControllers(IBankService bankService)
+        public BankControllers(IMediator mediator,IBankService bankService, ILogger<BankControllers> logger )
         {
+            _mediator = mediator;
             _bankService = bankService;
+            _logger = logger;
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(CreateBank createBank)
+        public async Task<IActionResult> Create(CreateBankCommand createBankCommand)
         {
+            
+            _logger.LogInformation($"Start endpoint Create with object {JsonSerializer.Serialize(createBankCommand)}");
             var idUser = User.Claims.First(c => c.Type == "id").Value;
-            createBank.UserId = Guid.Parse(idUser);
+            _logger.LogInformation($"Start UserId authenticated {JsonSerializer.Serialize(idUser)}");
+            createBankCommand.UserId = Guid.Parse(idUser);
+            await _mediator.Send(createBankCommand);
 
-            await _bankService.Create(createBank);
-            return Ok(new {});
+            //await _bankService.Create(createBank);
+           return new CreatedAtRouteResult("GetBankAccount", new { id = createBankCommand.UserId }, createBankCommand);
 
         }
 
