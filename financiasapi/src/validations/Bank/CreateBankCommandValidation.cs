@@ -15,13 +15,10 @@ namespace financiasapi.src.validations.Bank
                    .MaximumLength(30)
                    .WithMessage("The name of the bank must have a maximum of 30 characters");
             
-            RuleFor(x => x.UserId)
-                   .NotEmpty()
-                   .WithMessage("UserId invalid");
-            
             RuleFor(x => x.Cnpj).Custom((value, context)=>{
-                 if(CpfCnpjValidate.IsValid(value));
+                 if(!CpfCnpjValidate.IsValid(value)){
                        context.AddFailure("Document invalid");
+                 }
                    
             });      
         }

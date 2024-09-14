@@ -1,17 +1,12 @@
-
-
-using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
-using financiasapi.src.validations;
 using MediatR;
 
 namespace financiasapi.src.commands.Bank
 {
     public class CreateBankCommand :IRequest
     {
-        [CnpjCPFValidation]
         public string Cnpj { get; set; }
-        [Required]
+      
         public string Name { get; set; }
 
         [JsonIgnore]

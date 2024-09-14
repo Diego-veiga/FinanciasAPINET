@@ -16,13 +16,7 @@ namespace financias.src.services
             _mapper = mapper;
 
         }
-        public async Task Create(CreateBank createBank)
-        {
-            var user = _mapper.Map<Bank>(createBank);
-            _unitOFWork.bankRepository.Add(user!);
-            await _unitOFWork.Commit();
-        }
-
+        
         public async Task Delete(Guid id)
         {
             var banck = await _unitOFWork.bankRepository.GetById(id);
