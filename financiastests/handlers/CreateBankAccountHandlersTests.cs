@@ -1,4 +1,3 @@
-
 using AutoFixture;
 using financias.src.commands.BankAccount;
 using financias.src.handlers;

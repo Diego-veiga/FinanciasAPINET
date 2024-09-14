@@ -11,12 +11,12 @@ namespace financias.src.controllers
     [ApiController]
     [Route("api/[controller]")]
     [Authorize]
-    public class BankControllers : ControllerBase
+    public class BankController : ControllerBase
     {
         public IMediator _mediator { get; set; }
-        public ILogger<BankControllers> _logger { get; set; }
+        public ILogger<BankController> _logger { get; set; }
         private readonly IBankService _bankService;
-        public BankControllers(IMediator mediator,IBankService bankService, ILogger<BankControllers> logger )
+        public BankController(IMediator mediator,IBankService bankService, ILogger<BankController> logger )
         {
             _mediator = mediator;
             _bankService = bankService;
@@ -32,8 +32,7 @@ namespace financias.src.controllers
             _logger.LogInformation($"Start UserId authenticated {JsonSerializer.Serialize(idUser)}");
             createBankCommand.UserId = Guid.Parse(idUser);
             await _mediator.Send(createBankCommand);
-
-            //await _bankService.Create(createBank);
+            
            return new CreatedAtRouteResult("GetBankAccount", new { id = createBankCommand.UserId }, createBankCommand);
 
         }
