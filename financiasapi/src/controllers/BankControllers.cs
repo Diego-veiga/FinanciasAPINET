@@ -40,8 +40,11 @@ namespace financias.src.controllers
         [HttpDelete("id:guid")]
         public async Task<IActionResult> Delete(Guid id)
         {
-            await _bankService.Delete(id);
-            return Ok("banck deleted success");
+            var deleteBankCommand = new DeleteBankCommand(){ Id = id};
+  
+            _logger.LogInformation($"Start endpoint Create with object {JsonSerializer.Serialize(deleteBankCommand)}");
+            await _mediator.Send(deleteBankCommand);
+            return Ok("Bank deleted success");
         }
 
         [HttpGet("id:guid")]
