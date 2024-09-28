@@ -55,5 +55,33 @@ namespace financiastests.controllers
              var createdResult = Assert.IsType<CreatedAtRouteResult>(result);
             _mediatorMock.Verify(mediator => mediator.Send(It.IsAny<CreateBankCommand>(), default), Times.Once);
         }
+
+         [Fact]
+        public async void Update_ValidUpdateBankCommand_SendCommandProcess()
+        {
+            var bankController = new BankController(_mediatorMock.Object,_bankServiceMock.Object,_loggerMock.Object);
+            var claims = new List<Claim>
+            {
+                new Claim("id", Guid.NewGuid().ToString())
+            };
+            var identity = new ClaimsIdentity(claims);
+            var principal = new ClaimsPrincipal(identity);
+
+            bankController.ControllerContext = new ControllerContext
+            {
+                HttpContext = new DefaultHttpContext { User = principal }
+            };
+
+             var updateBankCommand = _fixture.Create<UpdateBankCommand>();
+            _mediatorMock.Setup(m => m.Send(It.IsAny<UpdateBankCommand>(),default));
+            var paramId =Guid.NewGuid(); 
+                     
+             var result = await bankController.Update(paramId,updateBankCommand);
+
+             var updatedResult = Assert.IsType<OkResult>(result);
+             Assert.Equal(updatedResult.StatusCode,200);
+             Assert.Equal(updateBankCommand.Id,paramId);
+            _mediatorMock.Verify(mediator => mediator.Send(It.IsAny<UpdateBankCommand>(), default), Times.Once);
+        }
     }
 }

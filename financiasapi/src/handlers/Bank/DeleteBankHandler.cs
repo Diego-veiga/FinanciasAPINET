@@ -26,12 +26,12 @@ namespace financiasapi.src.handlers.BankDelete
             
             if (bank is null)
             {
-                throw new ApplicationException("bank not found ");
+                throw new ApplicationException("Bank not found");
             }
 
             if (bank.UserId == null)
             {
-                throw new ApplicationException("default bank can't deleted ");
+                throw new ApplicationException("Default bank can't deleted");
 
             }
 

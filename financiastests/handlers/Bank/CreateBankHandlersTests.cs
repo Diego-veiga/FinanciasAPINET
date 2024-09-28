@@ -11,7 +11,7 @@ namespace financiastests.handlers.Banks
 {
     public class CreateBankHandlersTests
     {
-         public readonly Fixture _fixture ;
+        public readonly Fixture _fixture ;
         public Mock<IUnitOFWork> _unitOfWorkMock { get; set; }
         public Mock<ILogger<CreateBankHandler>> _loggerMock { get; set; }
 
@@ -41,7 +41,7 @@ namespace financiastests.handlers.Banks
                      
             var handler = new CreateBankHandler(_unitOfWorkMock.Object, _loggerMock.Object);
 
-           await handler.Handle(createBankAccountCommand, cancellationToken);
+            await handler.Handle(createBankAccountCommand, cancellationToken);
 
             _unitOfWorkMock.Verify(c => c.userRepository.GetById(It.IsAny<Guid>()), Times.Once());
             _unitOfWorkMock.Verify(c => c.bankRepository.Add(It.IsAny<Bank>()), Times.Once());

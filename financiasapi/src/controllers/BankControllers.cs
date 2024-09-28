@@ -72,11 +72,14 @@ namespace financias.src.controllers
         }
 
         [HttpPut("id:guid")]
-        public async Task<IActionResult> Update(Guid id, UpdateBank updateBank)
+        public async Task<IActionResult> Update(Guid id, UpdateBankCommand updateBankCommand)
         {
-            updateBank.Id = id;
-            await _bankService.Update(updateBank);
-            return NoContent();
+            _logger.LogInformation($"Start endpoint Update with object {JsonSerializer.Serialize(updateBankCommand)}");
+            _logger.LogInformation($"Start id authenticated {JsonSerializer.Serialize(id)}");
+            updateBankCommand.Id = id;
+            await _mediator.Send(updateBankCommand);
+            
+             return Ok();
         }
 
        
