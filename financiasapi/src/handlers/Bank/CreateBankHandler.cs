@@ -1,5 +1,6 @@
 
 using System.Text.Json;
+using System.Text.RegularExpressions;
 using financias.src.interfaces;
 using financiasapi.src.commands.Bank;
 using financiasapi.src.models;
@@ -28,15 +29,17 @@ namespace financiasapi.src.handlers.BankHandler
                 throw new ApplicationException("User not found");
             }
               _logger.LogInformation($"Start creating object for insert in database");
-
+              
+              var numericCnpj = new Regex(@"[^\d]").Replace(request.Cnpj,"");
               var bank = new Bank(){
                     Id = Guid.NewGuid(),
-                    Cnpj = request.Cnpj,
+                    Cnpj = numericCnpj,
                     Name = request.Name,
                     UserId = request.UserId,
                     CreatedAt = DateTime.Now,
                     Active = true,
               };
+
              
              _logger.LogInformation($"Object Bank created {JsonSerializer.Serialize(bank)}");
              _logger.LogInformation("Start Add objects");
