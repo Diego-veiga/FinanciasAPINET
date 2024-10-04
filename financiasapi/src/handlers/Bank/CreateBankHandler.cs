@@ -1,9 +1,7 @@
-
 using System.Text.Json;
 using System.Text.RegularExpressions;
 using financias.src.interfaces;
 using financiasapi.src.commands.Bank;
-using financiasapi.src.models;
 using MediatR;
 
 namespace financiasapi.src.handlers.BankHandler
@@ -31,7 +29,7 @@ namespace financiasapi.src.handlers.BankHandler
               _logger.LogInformation($"Start creating object for insert in database");
               
               var numericCnpj = new Regex(@"[^\d]").Replace(request.Cnpj,"");
-              var bank = new Bank(){
+              var bank = new models.Bank(){
                     Id = Guid.NewGuid(),
                     Cnpj = numericCnpj,
                     Name = request.Name,

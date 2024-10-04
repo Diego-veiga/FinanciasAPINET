@@ -1,6 +1,6 @@
 using financias.src.interfaces;
 using financiasapi.src.commands.Bank;
-using financiasapi.src.dtos;
+using financiasapi.src.query.Banks;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -50,9 +50,9 @@ namespace financias.src.controllers
         [HttpGet("id:guid")]
         public async Task<IActionResult> GetById(Guid id)
         {
-
-            var banckView = await _bankService.GetById(id);
-            return Ok(banckView);
+            var bankAccount=  new GetBankById(){ Id = id };
+             var bankAccountView = await _mediator.Send(bankAccount);
+            return Ok(bankAccountView);
         }
 
         [HttpGet]
