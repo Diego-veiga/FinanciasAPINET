@@ -1,5 +1,8 @@
 using financias.src.interfaces;
 using financiasapi.src.commands.Bank;
+using financiasapi.src.handlers.Bank;
+using financiasapi.src.models;
+using financiasapi.src.query.Bank;
 using financiasapi.src.query.Banks;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -59,16 +62,17 @@ namespace financias.src.controllers
         public async Task<IActionResult> GetActive()
         {
             var idUser = User.Claims.First(c => c.Type == "id").Value;
-            var bancksView = await _bankService.GetActive(Guid.Parse(idUser));
-            return Ok(bancksView);
+            var getBankAllByUserId = new GetBankAllByUserId() { UserId = Guid.Parse(idUser) };
+            var banksAccountView = await _mediator.Send(getBankAllByUserId);
+            return Ok(banksAccountView);
         }
 
         [HttpGet("userId:guid")]
         public async Task<IActionResult> GetByUserId(Guid userId)
         {
-
-            var banckView = await _bankService.GetByUserId(userId);
-            return Ok(banckView);
+            var getBankByUserId = new GetBankByUserId() { UserId = userId };
+            var banksAccountView = await _mediator.Send(getBankByUserId);
+            return Ok(banksAccountView);
         }
 
         [HttpPut("id:guid")]
