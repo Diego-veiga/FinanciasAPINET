@@ -1,7 +1,5 @@
 using financias.src.interfaces;
 using financiasapi.src.commands.Bank;
-using financiasapi.src.handlers.Bank;
-using financiasapi.src.models;
 using financiasapi.src.query.Bank;
 using financiasapi.src.query.Banks;
 using MediatR;
@@ -45,7 +43,7 @@ namespace financias.src.controllers
         {
             var deleteBankCommand = new DeleteBankCommand(){ Id = id};
   
-            _logger.LogInformation($"Start endpoint Create with object {JsonSerializer.Serialize(deleteBankCommand)}");
+            _logger.LogInformation($"Start endpoint Delete with object {JsonSerializer.Serialize(deleteBankCommand)}");
             await _mediator.Send(deleteBankCommand);
             return Ok("Bank deleted success");
         }
