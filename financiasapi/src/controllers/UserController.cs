@@ -1,5 +1,7 @@
 using financias.src.interfaces;
+using financiasapi.src.commands.user;
 using financiasapi.src.dtos;
+using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,15 +12,17 @@ namespace financias.src.controllers
     public class UserController : ControllerBase
     {
         private IUserService _userService;
-        public UserController(IUserService userService)
+        private IMediator _mediator;
+    public UserController(IUserService userService, IMediator mediator)
         {
             _userService = userService;
+            _mediator = mediator;
         }
 
         [HttpPost]
-        public async Task<ActionResult> Create(CreateUser createUser)
+        public async Task<ActionResult> Create(CreateUserCommand createUserCommand)
         {
-            await _userService.Create(createUser);
+            await  _mediator.Send(createUserCommand);
             return Ok(new { message = "User created successfully" });
         }
 

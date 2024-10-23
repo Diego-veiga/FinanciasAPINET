@@ -3,6 +3,7 @@ using AutoMapper;
 using financias.src.interfaces;
 using financiasapi.src.dtos;
 using financiasapi.src.models;
+using financiasapi.src.utils;
 using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 using Microsoft.EntityFrameworkCore;
 
@@ -32,9 +33,9 @@ namespace financias.src.services
 
             var newUser = new User(Guid.NewGuid(), createUser.Name, createUser.Email, createUser.Password, true, DateTime.Now, DateTime.Now);
 
-            byte[] salt = GenerateSalt([128, 8]);
+            byte[] salt = EncryptHelper.GenerateSalt([128, 8]);
             newUser.Salt = salt;
-            newUser.Password = EncryptPassword(createUser.Password, salt);
+            newUser.Password = EncryptHelper.EncryptPassword(createUser.Password, salt);
             _unitOFWork.userRepository.Add(newUser);
             await _unitOFWork.Commit();
         }
@@ -99,7 +100,7 @@ namespace financias.src.services
                 throw new ApplicationException("Email or passwrod invalid");
             }
             var userView = _mapper.Map<UserView>(user);
-            var comparPassword = EncryptPassword(login.Password, user.Salt);
+            var comparPassword = EncryptHelper.EncryptPassword(login.Password, user.Salt);
             if (user.Password == comparPassword)
             {
                 token = await _tokenService.Generate(userView);
@@ -120,8 +121,8 @@ namespace financias.src.services
             {
                 throw new ApplicationException("User not found ");
             }
-            byte[] salt = GenerateSalt([128, 8]);
-            var password = EncryptPassword(updateUser.Password, salt);
+            byte[] salt = EncryptHelper.GenerateSalt([128, 8]);
+            var password = EncryptHelper.EncryptPassword(updateUser.Password, salt);
             userExist.Name = updateUser.Name;
             userExist.Email = updateUser.Email;
             userExist.Password = password;
@@ -132,26 +133,7 @@ namespace financias.src.services
 
         }
 
-        private Byte[] GenerateSalt(byte[] salt)
-        {
-            using (var rng = RandomNumberGenerator.Create())
-            {
-                rng.GetBytes(salt);
-            }
-            return salt;
-        }
-
-        private string EncryptPassword(string senha, byte[] salt)
-        {
-            string senhaCriptografada = Convert.ToBase64String(KeyDerivation.Pbkdf2(
-                password: senha,
-                salt: salt,
-                prf: KeyDerivationPrf.HMACSHA1,
-                iterationCount: 10000,
-                numBytesRequested: 256 / 8));
-
-            return senhaCriptografada;
-        }
+      
 
 
     }
