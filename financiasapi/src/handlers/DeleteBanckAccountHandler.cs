@@ -1,4 +1,3 @@
-
 using System.Text.Json;
 using financias.src.commands.BankAccount;
 using financias.src.interfaces;

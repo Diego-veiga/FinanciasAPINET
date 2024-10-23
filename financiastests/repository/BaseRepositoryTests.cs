@@ -48,26 +48,7 @@ namespace financiastests.repository
                 Assert.False(userDeleted.Active);
         }
         
-        [Fact]
-        public void Delete_ShouldMarkEntityAsModified()
-        {
-                // Arrange
-                var context = new RepositoryTestsHelper().GetInMemoryAppDbContext();
-                var repository = new BaseRepository<User>(context);
-                var entity = new User(Guid.NewGuid(),"UserTest","teste@teste.com","123",true,DateTime.Now,DateTime.Now);
-                entity.Salt =[1];
-                repository.Add(entity);
-                context.SaveChanges();
-
-                // Act
-                repository.Delete(entity);
-                context.SaveChanges();
-                var userDeleted = context.Users.Find(entity.Id);
-
-                // Assert
-                Assert.False(userDeleted.Active);
-        }
-        
+                
         [Fact]
         public async Task GetById_ShouldReturnEntityById()
         {

@@ -40,13 +40,13 @@ namespace financias.src.handlers
                
             }
             
-            _logger.LogInformation($"Strart creating object for insert in database");
+            _logger.LogInformation($"Start creating object for insert in database");
 
             var bankAccount = new BankAccount(Guid.NewGuid(),request.Name,(AccountType)Enum.Parse(typeof(AccountType), request.Type),request.BankId,true,DateTime.Now, DateTime.Now);
            
            _logger.LogInformation($"Object BankAccount created {JsonSerializer.Serialize(bankAccount)}");
 
-            var userBanckAccount = new UserBanksAccounts()
+            var userBankAccount = new UserBanksAccounts()
             {
                 Id=Guid.NewGuid(),
                 BankAccountId = bankAccount.Id,
@@ -57,11 +57,11 @@ namespace financias.src.handlers
                 Active=true
             };
             
-             _logger.LogInformation($"Object UserBankAccount created {JsonSerializer.Serialize(userBanckAccount)}");
+             _logger.LogInformation($"Object UserBankAccount created {JsonSerializer.Serialize(userBankAccount)}");
              _logger.LogInformation("Start Add objects");
 
              _unitOFWork.bankAccountRepository.Add(bankAccount);
-             _unitOFWork.userBanksAccountsRepository.Add(userBanckAccount);
+             _unitOFWork.userBanksAccountsRepository.Add(userBankAccount);
              
              
             await _unitOFWork.Commit();

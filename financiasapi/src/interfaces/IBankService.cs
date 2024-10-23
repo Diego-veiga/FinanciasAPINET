@@ -4,7 +4,7 @@ namespace financias.src.interfaces
 {
     public interface IBankService
     {
-        Task Create(CreateBank createBank);
+        //Task Create(CreateBank createBank);
         Task Delete(Guid id);
         Task Update(UpdateBank updateBank);
         Task<BankView> GetById(Guid id);

@@ -14,8 +14,9 @@ namespace financias.src.Repository
         }
         public async Task<List<Bank>> GetByUserId(Guid userId)
         {
-            return await _context.Banks.Where(u => u.UserId == userId)
-                                        .Include(u => u.User)
+          
+            return await _context.Banks.Include(u => u.User)
+                                        .Where(u => u.UserId == userId)
                                         .ToListAsync();
         }
     }

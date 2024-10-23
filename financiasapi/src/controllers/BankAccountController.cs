@@ -1,6 +1,7 @@
 using System.Text.Json;
 using financias.src.commands.BankAccount;
 using financias.src.query.BankAccount;
+using financiasapi.src.commands.Bank;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
