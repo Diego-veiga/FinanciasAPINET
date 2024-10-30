@@ -1,9 +1,11 @@
+using financias.src.commands.BankAccount;
 using financias.src.interfaces;
 using financiasapi.src.commands.user;
 using financiasapi.src.dtos;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Text.Json;
 
 namespace financias.src.controllers
 {
@@ -13,15 +15,18 @@ namespace financias.src.controllers
     {
         private IUserService _userService;
         private IMediator _mediator;
-    public UserController(IUserService userService, IMediator mediator)
+        private ILogger<UserController> _logger { get; set; }
+        public UserController(IUserService userService, IMediator mediator, ILogger<UserController> logger)
         {
             _userService = userService;
             _mediator = mediator;
+            _logger = logger;
         }
 
         [HttpPost]
         public async Task<ActionResult> Create(CreateUserCommand createUserCommand)
         {
+            _logger.LogInformation($"Start endpoint Create of UserController with object {JsonSerializer.Serialize(createUserCommand)}");
             await  _mediator.Send(createUserCommand);
             return Ok(new { message = "User created successfully" });
         }

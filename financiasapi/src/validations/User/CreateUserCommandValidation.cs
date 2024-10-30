@@ -1,5 +1,4 @@
 ﻿using financiasapi.src.commands.user;
-using financiasapi.src.utils;
 using FluentValidation;
 
 namespace financiasapi.src.validations.User
