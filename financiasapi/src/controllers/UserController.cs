@@ -32,11 +32,12 @@ namespace financias.src.controllers
         }
 
         [HttpPut("id:guid")]
-        public async Task<ActionResult> Update(Guid id, UpdateUser updateUser)
+        public async Task<ActionResult> Update(Guid id, UpdateUserCommand updateUserCommand)
         {
-
-            updateUser.Id = id;
-            await _userService.Update(updateUser);
+            _logger.LogInformation($"Start endpoint Update of UserController with object {JsonSerializer.Serialize(updateUserCommand)}");
+            updateUserCommand.Id = id;
+            await _mediator.Send(updateUserCommand);
+         
             return Ok(new { message = "User updated successfully" });
 
         }

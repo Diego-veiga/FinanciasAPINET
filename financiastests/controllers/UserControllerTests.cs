@@ -4,7 +4,6 @@ using financias.src.controllers;
 using financias.src.interfaces;
 using financiasapi.src.commands.user;
 using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Moq;
