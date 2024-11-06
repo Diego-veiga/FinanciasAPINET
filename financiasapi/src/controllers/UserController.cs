@@ -1,4 +1,3 @@
-using financias.src.commands.BankAccount;
 using financias.src.interfaces;
 using financiasapi.src.commands.user;
 using financiasapi.src.dtos;
